@@ -42,8 +42,7 @@
               "RelativeToolTip": "Eco-Toner\\Program.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T23:44:59.564Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T23:44:59.564Z"
             },
             {
               "$type": "Document",
@@ -51,9 +50,9 @@
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml",
               "RelativeDocumentMoniker": "Eco-Toner\\Views\\Acceso\\Login.cshtml",
-              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml*",
-              "RelativeToolTip": "Eco-Toner\\Views\\Acceso\\Login.cshtml*",
-              "ViewState": "AgIAAH0AAAAAAAAAAAAUwIAAAAAfAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml",
+              "RelativeToolTip": "Eco-Toner\\Views\\Acceso\\Login.cshtml",
+              "ViewState": "AgIAAIEAAAAAAAAAAAAAAIAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-03-12T19:08:59.321Z",
               "EditorCaption": ""
@@ -68,8 +67,7 @@
               "RelativeToolTip": "Eco-Toner\\Models\\Usuario.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T19:06:39.76Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T19:06:39.76Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "Eco-Toner\\Controllers\\AccesoController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T19:04:53.882Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T19:04:53.882Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "Eco-Toner\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T19:00:30.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-12T19:00:30.947Z"
             }
           ]
         }
