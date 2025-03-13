@@ -29,3 +29,34 @@ C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\Eco-Toner\Eco-T
 C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.pdb
 C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.genruntimeconfig.cache
 C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\ref\Eco-Toner.dll
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\appsettings.Development.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\appsettings.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\Eco-Toner.staticwebassets.runtime.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\Eco-Toner.exe
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\Eco-Toner.deps.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\Eco-Toner.runtimeconfig.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\Eco-Toner.dll
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\Eco-Toner.pdb
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.GeneratedMSBuildEditorConfig.editorconfig
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.AssemblyInfoInputs.cache
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.AssemblyInfo.cs
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.csproj.CoreCompileInputs.cache
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.MvcApplicationPartsAssemblyInfo.cache
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.RazorAssemblyInfo.cache
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.RazorAssemblyInfo.cs
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.sourcelink.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets.build.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets.development.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets\msbuild.Eco-Toner.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets\msbuild.build.Eco-Toner.props
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Eco-Toner.props
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Eco-Toner.props
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\scopedcss\bundle\Eco-Toner.styles.css
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\scopedcss\projectbundle\Eco-Toner.bundle.scp.css
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.dll
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\refint\Eco-Toner.dll
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.pdb
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.genruntimeconfig.cache
+D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\ref\Eco-Toner.dll
