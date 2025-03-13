@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Eco-Toner")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+158b5f55e8dd5efa5ead05b9c32d2f1717dd5429")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2048c57bc73f312be953e156b5b3ba341219f567")]
 [assembly: System.Reflection.AssemblyProductAttribute("Eco-Toner")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Eco-Toner")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
