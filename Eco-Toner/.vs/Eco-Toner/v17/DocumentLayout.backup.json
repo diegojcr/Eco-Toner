@@ -1,25 +1,29 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\",
+  "WorkspaceRootPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\eco-toner\\eco-toner\\eco-toner\\views\\acceso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\views\\acceso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\eco-toner\\eco-toner\\eco-toner\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\eco-toner\\eco-toner\\eco-toner\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\eco-toner\\eco-toner\\eco-toner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\pruebarepoecotoner\\eco-toner\\eco-toner\\eco-toner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\eco-toner\\eco-toner\\eco-toner\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\DB\\DbAb6668EcotonerContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Eco-Toner\\Models\\DB\\DbAb6668EcotonerContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\pruebarepoecotoner\\eco-toner\\eco-toner\\eco-toner\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\controllers\\accesocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\pruebarepoecotoner\\eco-toner\\eco-toner\\eco-toner\\views\\acceso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\views\\acceso\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\pruebarepoecotoner\\eco-toner\\eco-toner\\eco-toner\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|c:\\users\\diego\\onedrive - universidad rafael landivar\\escritorio\\pruebarepoecotoner\\eco-toner\\eco-toner\\eco-toner\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1F30E1E9-AA03-42D9-9D3B-B74B219C3E12}|Eco-Toner\\Eco-Toner.csproj|solutionrelative:eco-toner\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -34,36 +38,49 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Program.cs",
-              "RelativeDocumentMoniker": "Eco-Toner\\Program.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Program.cs",
-              "RelativeToolTip": "Eco-Toner\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "DbAb6668EcotonerContext.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\DB\\DbAb6668EcotonerContext.cs",
+              "RelativeDocumentMoniker": "Eco-Toner\\Models\\DB\\DbAb6668EcotonerContext.cs",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\DB\\DbAb6668EcotonerContext.cs",
+              "RelativeToolTip": "Eco-Toner\\Models\\DB\\DbAb6668EcotonerContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-12T23:44:59.564Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml",
-              "RelativeDocumentMoniker": "Eco-Toner\\Views\\Acceso\\Login.cshtml",
-              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml",
-              "RelativeToolTip": "Eco-Toner\\Views\\Acceso\\Login.cshtml",
-              "ViewState": "AgIAAIEAAAAAAAAAAAAAAIAAAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-12T19:08:59.321Z",
+              "WhenOpened": "2025-03-14T17:03:29.151Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Program.cs",
+              "RelativeDocumentMoniker": "Eco-Toner\\Program.cs",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Program.cs",
+              "RelativeToolTip": "Eco-Toner\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-12T23:44:59.564Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml",
+              "RelativeDocumentMoniker": "Eco-Toner\\Views\\Acceso\\Login.cshtml",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Views\\Acceso\\Login.cshtml",
+              "RelativeToolTip": "Eco-Toner\\Views\\Acceso\\Login.cshtml",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAIAAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-12T19:08:59.321Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Usuario.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "Eco-Toner\\Models\\Usuario.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Models\\Usuario.cs",
               "RelativeToolTip": "Eco-Toner\\Models\\Usuario.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -71,23 +88,23 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AccesoController.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\AccesoController.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\AccesoController.cs",
               "RelativeDocumentMoniker": "Eco-Toner\\Controllers\\AccesoController.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\AccesoController.cs",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\AccesoController.cs",
               "RelativeToolTip": "Eco-Toner\\Controllers\\AccesoController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-12T19:04:53.882Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Eco-Toner\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Eco-Toner\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

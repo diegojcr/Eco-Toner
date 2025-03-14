@@ -4738,11 +4738,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
+      "projectUniqueName": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
       "projectName": "Eco-Toner",
-      "projectPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
+      "projectPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
       "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\obj\\",
+      "outputPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
