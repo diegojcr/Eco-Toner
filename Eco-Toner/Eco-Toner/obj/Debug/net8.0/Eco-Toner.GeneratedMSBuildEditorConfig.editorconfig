@@ -17,47 +17,51 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Eco_Toner
 build_property.RootNamespace = Eco_Toner
-build_property.ProjectDir = C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\
+build_property.ProjectDir = D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner
+build_property.MSBuildProjectDirectory = D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Acceso/Login.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Acceso/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNvXExvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Dashboard/Dashboard.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Dashboard/Dashboard.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Home/Index.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/FormularioTicket/FormularioTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYXJpb1RpY2tldFxGb3JtdWxhcmlvVGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Home/Privacy.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/Error.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/_ViewImports.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/_ViewStart.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diego/OneDrive - Universidad Rafael Landivar/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/_Layout.cshtml]
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-ubaz3gwl9b
