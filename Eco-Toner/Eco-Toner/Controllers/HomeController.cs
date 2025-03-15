@@ -1,9 +1,11 @@
 using Eco_Toner.Models;
+using Eco_Toner.Permisos;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace Eco_Toner.Controllers
 {
+    [ValidarSesion]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -21,6 +23,12 @@ namespace Eco_Toner.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Acceso");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

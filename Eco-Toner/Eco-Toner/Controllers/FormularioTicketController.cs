@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Eco_Toner.Controllers
 {
     [ValidarSesion]
-    public class DashboardController : Controller
+    public class FormularioTicketController : Controller
     {
-        public IActionResult Dashboard()
+        public IActionResult FormularioTicket()
         {
             return View();
         }
