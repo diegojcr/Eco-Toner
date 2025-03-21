@@ -1,0 +1,169 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: radial-gradient(circle, black, #116244);
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 0 20px 20px 0;
+            z-index: 200;
+        }
+
+            .sidebar h2 {
+                text-align: center;
+                margin-bottom: 15px;
+                font-size: 24px;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                font-weight: bold;
+                font-family: 'Poppins', sans-serif;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            }
+
+
+
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+
+            .menu li {
+                padding: 15px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-left: 4px solid transparent;
+                border-radius: 10px;
+                margin: 5px;
+            }
+
+                .menu li:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateX(8px);
+                    border-left: 4px solid #a1e3b0;
+                }
+
+                .menu li a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    font-weight: 500;
+                    transition: color 0.3s ease;
+                }
+
+                .menu li:hover a {
+                    color: #dff;
+                }
+
+        .content-welcome {
+            margin-left: 250px;
+
+            padding: 40px;
+            color: #333;
+            text-align: center;
+            flex-grow: 1;
+        }
+
+        .welcome-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 60px; /* Añadido para dar espacio a la barra superior */
+        }
+
+            .welcome-box h1 {
+                color: #116244;
+                font-size: 36px;
+                margin-bottom: 15px;
+            }
+
+            .welcome-box p {
+                color: #555;
+                font-size: 18px;
+            }
+        /* Barra superior nueva */
+        .top-bar {
+            height: 60px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 250px; /* Mismo ancho que el sidebar */
+            z-index: 100;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+            .user-info .user-name {
+                margin-right: 10px;
+                font-weight: 500;
+            }
+
+        .logout-btn {
+            padding: 6px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul class="menu">
+            <li><a href="@Url.Action("VisualizarTicket","VisualizarTicket")">Visualizar Tickets</a></li>
+            <li><a href="#">Categorías</a></li>
+        </ul>
+    </div>
+    <!-- Nueva barra superior -->
+    <div class="top-bar">
+        <div class="user-info">
+            <span class="user-name">@ViewBag.usuario</span>
+            <i class="bi bi-person-circle me-2"></i>
+        </div>
+        <button class="logout-btn" onclick="location.href='@Url.Action("CerrarSesion","Home")'">
+            <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+        </button>
+    </div>
+    <div class="content-welcome">
+        <div class="welcome-box">
+            <h1>¡Bienvenido!</h1>
+            <p>Nos alegra verte de nuevo. Utiliza el menú de la izquierda para navegar por el sistema.</p>
+        </div>
+    </div>
+</body>
+</html>

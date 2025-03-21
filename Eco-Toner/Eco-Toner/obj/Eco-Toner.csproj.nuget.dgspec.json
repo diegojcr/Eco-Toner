@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj": {}
+    "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj": {}
   },
   "projects": {
-    "D:\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj": {
+    "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
+        "projectUniqueName": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
         "projectName": "Eco-Toner",
-        "projectPath": "D:\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
-        "packagesPath": "C:\\Users\\SEBASTIAN\\.nuget\\packages\\",
-        "outputPath": "D:\\Escritorio\\Eco-Toner\\Eco-Toner\\Eco-Toner\\obj\\",
+        "projectPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\Eco-Toner.csproj",
+        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\diego\\OneDrive - Universidad Rafael Landivar\\Escritorio\\PruebaRepoEcotoner\\Eco-Toner\\Eco-Toner\\Eco-Toner\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\SEBASTIAN\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -74,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

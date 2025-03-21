@@ -24,7 +24,7 @@ namespace Eco_Toner.Controllers
             string usuario = oUsuario.User;
             string clave = oUsuario.Contra;
 
-            var resultado = _context.Database
+            var resultadoRol = _context.Database
             .SqlQueryRaw<int>(
                     "EXEC sp_ValidarUsuario @usuario, @contra",
                     new SqlParameter("@usuario", usuario),
@@ -32,12 +32,36 @@ namespace Eco_Toner.Controllers
                 )
                 .AsEnumerable()
                 .FirstOrDefault();
-            var resultadoString = resultado.ToString();
+            var resultadoString = resultadoRol.ToString();
 
-            if (resultado > 0)
+            if (resultadoRol == 1)
             {
                 HttpContext.Session.SetString("Usuario", usuario);
                 return RedirectToAction("Dashboard", "Dashboard");
+            }
+            else if (resultadoRol == 2)
+            {
+                //Si inicia sesion un operador de servicio al cliente ira a su respectivo dashboard
+                HttpContext.Session.SetString("Usuario", usuario);
+                return RedirectToAction("DashboardSC", "Dashboard");
+            }
+            else if (resultadoRol == 3)
+            {
+                //Si inicia sesion un tecnico remoto ira a su respectivo dashboard
+                HttpContext.Session.SetString("Usuario", usuario);
+                return RedirectToAction("DashboardTR", "Dashboard");
+            }
+            else if (resultadoRol == 4)
+            {
+                //Si inicia sesion un tecnico de area ira a su respectivo dashboard
+                HttpContext.Session.SetString("Usuario", usuario);
+                return RedirectToAction("DashboardTA", "Dashboard");
+            }
+            else if (resultadoRol == 5)
+            {
+                //Si inicia sesion un tecnico de area ira a su respectivo dashboard
+                HttpContext.Session.SetString("Usuario", usuario);
+                return RedirectToAction("DashboardTT", "Dashboard");
             }
             else
             {
