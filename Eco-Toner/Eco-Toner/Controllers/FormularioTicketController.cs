@@ -1,6 +1,7 @@
 ﻿using Eco_Toner.Models;
 using Eco_Toner.Models.DB;
 using Eco_Toner.Permisos;
+using Eco_Toner.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,12 @@ namespace Eco_Toner.Controllers
     public class FormularioTicketController : Controller
     {
         private readonly DbAb6668EcotonerContext _context;
+        private readonly EmailService _emailService;
 
-        public FormularioTicketController(DbAb6668EcotonerContext context)
+        public FormularioTicketController(DbAb6668EcotonerContext context, EmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
         public IActionResult FormularioTicket()
@@ -26,7 +29,7 @@ namespace Eco_Toner.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult FormularioTicket(CrearTicket crearTicket)
+        public async Task <IActionResult> FormularioTicket(CrearTicket crearTicket)
         {
             //Obtener el usuario de la sesion
             var usuario = HttpContext.Session.GetString("Usuario");
@@ -42,7 +45,17 @@ namespace Eco_Toner.Controllers
                     new SqlParameter("@SERIE_IMPRESORA", crearTicket.Serie_Impresora),
                     new SqlParameter("@CORREO_TECNICO", crearTicket.Correo_Tecnico),
                     new SqlParameter("@DESCRIPCION", crearTicket.Descripcion));
-                TempData["MensajeExitoCrearTicket"] = "Ticket creado con exito";
+                // Enviar correo al técnico
+                string asunto = "Nuevo Ticket Asignado";
+                string mensaje = $"Hola, se te ha asignado un nuevo ticket.<br><br>" +
+                                 $"<b>Cliente:</b> {crearTicket.Correo_Cliente} <br>" +
+                                 $"<b>Impresora:</b> {crearTicket.Serie_Impresora} <br>" +
+                                 $"<b>Descripción:</b> {crearTicket.Descripcion} <br><br>" +
+                                 $"Por favor, revisa el sistema.";
+
+                await _emailService.EnviarCorreoAsync("ecotonernotificaciones@gmail.com", asunto, mensaje);
+
+                TempData["MensajeExitoCrearTicket"] = "Ticket creado y notificación enviada al técnico.";
                 return View();
             }
             catch (Exception ex)
