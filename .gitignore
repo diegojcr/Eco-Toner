@@ -435,3 +435,15 @@ packages/
 secrets.json
 appsettings.*.json
 
+# Visual Studio
+.vs/
+*.suo
+*.v2
+
+# Archivos compilados de .NET
+bin/
+obj/
+*.pdb
+*.exe
+*.dll
+*.cache
