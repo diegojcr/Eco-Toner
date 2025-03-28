@@ -1,4 +1,5 @@
 using Eco_Toner.Models.DB;
+using Eco_Toner.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSession();
 builder.Services.AddDbContext<DbAb6668EcotonerContext>(options =>
     options.UseSqlServer("Data Source=SQL1001.site4now.net;Initial Catalog=db_ab6668_ecotoner;User Id=db_ab6668_ecotoner_admin;Password=GRUPOCUCU1.;"));
-
+builder.Services.AddSingleton<EmailService>();
 
 var app = builder.Build();
 

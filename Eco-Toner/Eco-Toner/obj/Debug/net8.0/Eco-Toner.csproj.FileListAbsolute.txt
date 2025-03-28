@@ -367,3 +367,8 @@ D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\runtimes\browser\li
 D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.csproj.AssemblyReference.cache
 D:\Escritorio\Eco-Toner\Eco-Toner\Eco-Toner\obj\Debug\net8.0\Eco-Toner.csproj.CopyComplete
+C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\PruebaRepoEcotoner\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\PruebaRepoEcotoner\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\MailKit.dll
+C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\PruebaRepoEcotoner\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\MimeKit.dll
+C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\PruebaRepoEcotoner\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\diego\OneDrive - Universidad Rafael Landivar\Escritorio\PruebaRepoEcotoner\Eco-Toner\Eco-Toner\Eco-Toner\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
