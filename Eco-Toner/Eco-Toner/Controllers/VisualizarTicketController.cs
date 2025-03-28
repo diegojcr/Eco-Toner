@@ -16,6 +16,7 @@ namespace Eco_Toner.Controllers
         {
             _context = context;
         }
+
         [HttpGet]
         public IActionResult VisualizarTicket()
         {
@@ -33,14 +34,49 @@ namespace Eco_Toner.Controllers
             .SqlQueryRaw<VisualizarTicket>("EXEC SP_VERTICKETS @USUARIO", new SqlParameter("@USUARIO", usuario))
             .ToList();
 
+            // Llamar al SP y obtener los tickets del usuario
+            var tecnicos = _context.Database
+            .SqlQueryRaw<VerTecnico>("EXEC SP_VERTECNICO")
+            .ToList();
 
-            // Asegurar que no sea null, en su lugar devolver una lista vacía
-            if (tickets == null || tickets.Count == 0)
+
+            // Crear el modelo unificado y asegurarse de que las listas no sean null
+            var model = new VisualizarTicketsViewModel
             {
-                tickets = new List<VisualizarTicket>(); // Lista vacía para evitar errores en la vista
-            }
+                Tickets = tickets ?? new List<VisualizarTicket>(),
+                Tecnicos = tecnicos ?? new List<VerTecnico>(), // Inicializar vacía si no se usa en esta vista
 
-            return View(tickets);
+            };
+
+            return View(model);
+
         }
+
+        public IActionResult EscalarTicket(EscalarTicket EscalarTicket)
+        {
+            //Obtener el usuario de la sesion
+            var usuario = HttpContext.Session.GetString("Usuario");
+            //Pasar ese usuario a la vista
+            ViewBag.usuario = usuario;
+            try
+            {
+                // Ejecutar el SP
+                _context.Database.ExecuteSqlRaw(
+                    "EXEC SP_ESCALARTICKET @usario, @descripcion, @usuario_asignado, @numero_orden",
+                    new SqlParameter("@usario", usuario),
+                    new SqlParameter("@descripcion", EscalarTicket.descripcion),
+                    new SqlParameter("@usuario_asignado", EscalarTicket.usuario_asignado),
+                    new SqlParameter("@numero_orden", EscalarTicket.numero_orden));
+                TempData["MensajeExitoCrearTicket"] = "Ticket escalado con exito";
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores: muestra el mensaje de error en la vista
+                TempData["MensajeErrorEscalarTicket"] = "No se pudo escalar el ticket: " + ex.Message;
+            }
+            return RedirectToAction("VisualizarTicket");
+        }
+
+
     }
 }
