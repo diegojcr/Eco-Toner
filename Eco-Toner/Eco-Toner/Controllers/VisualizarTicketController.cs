@@ -106,5 +106,36 @@ namespace Eco_Toner.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult FinalizarTicket([FromBody] string numeroOrden)
+        {
+            // Obtener el usuario de la sesión
+            var usuario = HttpContext.Session.GetString("Usuario");
+            ViewBag.usuario = usuario;
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                return BadRequest("El usuario no está autenticado.");
+            }
+
+            try
+            {
+                Console.WriteLine("Número de orden recibido: " + numeroOrden);
+
+                _context.Database.ExecuteSqlRaw(
+                    "EXEC SP_FINALIZAR_TICKETS @usario, @numero_orden",
+                    new SqlParameter("@usario", usuario),
+                    new SqlParameter("@numero_orden", numeroOrden));
+
+                return Ok("Ticket finalizado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error al finalizar el ticket: " + ex.Message);
+
+            }
+
+        }
+
     }
 }
