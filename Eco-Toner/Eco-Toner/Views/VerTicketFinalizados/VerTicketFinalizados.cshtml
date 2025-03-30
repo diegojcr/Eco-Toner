@@ -1,0 +1,332 @@
+﻿@{
+    Layout = null;
+}
+@model List<Eco_Toner.Models.VerTicketFinalizados>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Tickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: radial-gradient(circle, black, #116244);
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 0 20px 20px 0;
+        }
+
+            .sidebar h2 {
+                text-align: center;
+                font-size: 24px;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-family: 'Poppins', sans-serif;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+
+            .menu li {
+                padding: 15px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-left: 4px solid transparent;
+                border-radius: 10px;
+                margin: 5px;
+            }
+
+                .menu li:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateX(8px);
+                    border-left: 4px solid #a1e3b0;
+                }
+
+                .menu li a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    font-weight: 500;
+                    transition: color 0.3s ease;
+                }
+
+        .content-section {
+            margin-left: 260px;
+            padding: 80px 40px 40px;
+            color: #333;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        /* Botón Detalle */
+        .btn-primary {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-primary:hover {
+                background-color: #007BFF; /* Azul moderno */
+                color: white;
+                border-color: #007BFF;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+
+        /* Botón Status Ticket */
+        .btn-info {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-info:hover {
+                background-color: #3498DB; /* Azul moderno */
+                color: white;
+                border-color: #3498DB;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+        .ticket-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .ticket {
+            width: 45%; /* Ajusta según necesidad */
+            min-width: 300px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .ticket-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+            .ticket-buttons button {
+                flex: 1; /* Hace que los botones ocupen el mismo espacio */
+                min-width: 120px; /* Evita que sean muy pequeños */
+            }
+
+
+
+        .ticket-card {
+            margin-bottom: 20px; /* Ajusta el espacio entre tickets */
+        }
+
+
+        /* Barra superior nueva */
+        .top-bar {
+            height: 60px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 250px; /* Mismo ancho que el sidebar */
+            z-index: 100;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+            .user-info .user-name {
+                margin-right: 10px;
+                font-weight: 500;
+            }
+
+        .no-tickets {
+            background-color: #fff3cd; /* Color de fondo suave */
+            border: 1px solid #ffeeba; /* Borde sutil */
+            color: #856404; /* Color de texto */
+            font-size: 18px; /* Tamaño de fuente legible */
+            font-weight: bold; /* Texto en negrita */
+            padding: 15px; /* Espaciado interno */
+            border-radius: 8px; /* Bordes redondeados */
+            text-align: center; /* Centrar texto */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+        }
+
+        /* Estilo corregido para tickets finalizados */
+        .ticket-finalizado {
+            border-left: 4px solid #dc3545;
+            background-color: rgba(220, 53, 69, 0.05);
+            position: relative;
+            padding-top: 40px; /* Espacio para el badge */
+        }
+
+            /* Badge "Finalizado" - Versión corregida */
+            .ticket-finalizado .badge-finalizado {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: #dc3545;
+                color: white;
+                padding: 3px 8px;
+                border-radius: 3px;
+                font-size: 0.75rem;
+                font-weight: bold;
+            }
+
+            /* Contenido del ticket */
+            .ticket-finalizado .card-body {
+                padding: 15px;
+            }
+
+            /* Botón de detalles */
+            .ticket-finalizado .btn-primary {
+                background-color: #dc3545;
+                border-color: #dc3545;
+                margin-top: 10px;
+            }
+
+
+        .logout-btn {
+            padding: 6px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Animación para el toast */
+        .toast {
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul class="menu">
+            <li><a href="@Url.Action("VisualizarTicket","VisualizarTicket")">Visualizar Tickets</a></li>
+            <li><a href="@Url.Action("VerTicketEscalados","VerTicketEscalados")">Tickets Escalados</a></li>
+            <li><a href="@Url.Action("VerTicketFinalizados","VerTicketFinalizados")">Tickets Finalizados</a></li>
+        </ul>
+    </div>
+
+    <!-- Nueva barra superior -->
+    <div class="top-bar">
+        <div class="user-info">
+            <span class="user-name">@ViewBag.usuario</span>
+            <i class="bi bi-person-circle me-2"></i>
+        </div>
+        <button class="logout-btn" onclick="location.href='@Url.Action("CerrarSesion","Home")'">
+            <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+        </button>
+    </div>
+
+    <div class="content-section">
+        <h2 class="mb-4 text-center">Tickets Finalizados</h2>
+        <div class="row justify-content-center">
+            <div class="row">
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var ticket in Model)
+                    {
+                        <div class="col-md-6">
+                            <div class="card ticket-card ticket-finalizado">
+                                <div class="card-body">
+                                    <p><strong>Numero de Orden:</strong>@ticket.numero_orden</p>
+                                    <p><strong>Numero de Serie:</strong> @ticket.Numero_Serie</p>
+                                    <p><strong>Nombre de Modelo:</strong> @ticket.Nombre_Modelo</p>
+                                    <button class="btn btn-primary" onclick="verDetalle('@ticket.numero_orden','@ticket.Numero_Serie', '@ticket.Nombre_Modelo', '@ticket.NombreCliente', '@ticket.ApellidoCliente', '@ticket.Empresa', '@ticket.Dirección', '@ticket.Descripción', '@ticket.NombreTecnico', '@ticket.ApellidoTecnico', '@ticket.Fecha_Asignación', '@ticket.Fecha_Fin')">Detalle</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="alert no-tickets" role="alert">
+                            No hay tickets finalizados en este momento.
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalle Ticket -->
+    <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleModalLabel">Detalles del Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modalDetalleBody"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verDetalle(numero_orden, numeroSerie, modelo, nombreCliente, apellidoCliente, empresa, direccion, descripcion, nombreTecnico, apellidoTecnico, Fecha_Asignación, Fecha_Fin) {
+            let detalles = `
+                        <p><strong>Numero de Orden:</strong> ${numero_orden}</p>
+                        <p><strong>Numero de Serie:</strong> ${numeroSerie}</p>
+                        <p><strong>Nombre de Modelo:</strong> ${modelo}</p>
+                        <p><strong>Nombre del Cliente:</strong> ${nombreCliente} ${apellidoCliente}</p>
+                        <p><strong>Empresa:</strong> ${empresa}</p>
+                        <p><strong>Dirección:</strong> ${direccion}</p>
+                        <p><strong>Descripción:</strong> ${descripcion}</p>
+                        <p><strong>Técnico:</strong> ${nombreTecnico} ${apellidoTecnico}</p>
+                        <p><strong>Fecha de Asignacion:</strong> ${Fecha_Asignación}</p >
+                        <p><strong>Fecha de Fin:</strong> ${Fecha_Fin}</p >`;
+            document.getElementById('modalDetalleBody').innerHTML = detalles;
+            var modal = new bootstrap.Modal(document.getElementById('detalleModal'));
+            modal.show();
+        }
+    </script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

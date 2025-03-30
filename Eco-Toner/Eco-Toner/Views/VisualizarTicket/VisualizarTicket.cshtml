@@ -272,6 +272,8 @@
         <h2>Menú</h2>
         <ul class="menu">
             <li><a href="@Url.Action("VisualizarTicket","VisualizarTicket")">Visualizar Tickets</a></li>
+            <li><a href="@Url.Action("VerTicketEscalados","VerTicketEscalados")">Tickets Escalados</a></li>
+            <li><a href="@Url.Action("VerTicketFinalizados","VerTicketFinalizados")">Tickets Finalizados</a></li>
         </ul>
     </div>
 
@@ -288,7 +290,7 @@
 
     <div class="content-section">
         <h2 class="mb-4 text-center">Tickets Asignados</h2>
-        <div class="ticket-container">
+        <div class="row justify-content-center">
             <div class="row">
                 @if (Model != null && Model.Tickets.Any())
                 {
