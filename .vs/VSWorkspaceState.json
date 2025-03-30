@@ -4,9 +4,10 @@
     "\\Eco-Toner",
     "\\Eco-Toner\\Eco-Toner",
     "\\Eco-Toner\\Eco-Toner\\Controllers",
+    "\\Eco-Toner\\Eco-Toner\\Models",
     "\\Eco-Toner\\Eco-Toner\\Views",
-    "\\Eco-Toner\\Eco-Toner\\Views\\Dashboard"
+    "\\Eco-Toner\\Eco-Toner\\Views\\VisualizarTicket"
   ],
-  "SelectedNode": "\\Eco-Toner\\Eco-Toner\\Controllers\\AccesoController.cs",
+  "SelectedNode": "\\Eco-Toner\\Eco-Toner.sln",
   "PreviewInSolutionExplorer": false
 }
