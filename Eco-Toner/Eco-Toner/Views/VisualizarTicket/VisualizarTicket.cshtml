@@ -114,7 +114,7 @@
             }
 
         /* Botón Finalizar Ticket */
-        .btn-success {
+        .btn-aceptar {
             border: 2px solid black;
             background-color: white;
             color: black;
@@ -124,7 +124,7 @@
             transition: all 0.3s ease-in-out;
         }
 
-            .btn-success:hover {
+            .btn-aceptar:hover {
                 background-color: #2ECC71; /* Verde moderno */
                 color: white;
                 border-color: #2ECC71;
@@ -250,6 +250,21 @@
             font-size: 14px;
             cursor: pointer;
         }
+
+        .ticket-aceptado {
+            border-left: 5px solid #28a745;
+            background-color: rgba(40, 167, 69, 0.05);
+            transition: all 0.3s ease;
+        }
+
+            .ticket-aceptado .btn-aceptar {
+                pointer-events: none;
+            }
+
+        /* Animación para el toast */
+        .toast {
+            transition: opacity 0.5s ease;
+        }
     </style>
 </head>
 <body>
@@ -288,7 +303,9 @@
                                     <p><strong>Nombre de Modelo:</strong> @ticket.Nombre_Modelo</p>
                                     <button class="btn btn-primary" onclick="verDetalle('@ticket.numero_orden','@ticket.Numero_Serie', '@ticket.Nombre_Modelo', '@ticket.NombreCliente', '@ticket.ApellidoCliente', '@ticket.Empresa', '@ticket.Dirección', '@ticket.Descripción', '@ticket.NombreTecnico', '@ticket.ApellidoTecnico', '@ticket.Fecha_Asignación' )">Detalle</button>
                                     <button class="btn btn-danger">Borrar Ticket</button>
-                                    <button class="btn btn-success">Finalizar Ticket</button>
+                                    <button class="btn btn-aceptar" data-numero-orden="@ticket.numero_orden" data-descripcion="@ticket.Descripción">
+                                        Aceptar Ticket
+                                    </button>
                                     <button class="btn btn-info">Status Ticket</button>
                                     <button class="btn btn-escalar"
                                             data-numero-orden="@ticket.numero_orden"
@@ -391,6 +408,27 @@
         </div>
     </div>
 
+    <!-- Modal Aceptar Ticket -->
+    <div class="modal fade" id="modalAceptarTicket" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Aceptación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea aceptar el siguiente ticket?</p>
+                    <p><strong>Número de Orden:</strong> <span id="modalNumeroOrden"></span></p>
+                    <p><strong>Descripción:</strong> <span id="modalDescripcion"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btnConfirmarAceptar">Aceptar Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
 
@@ -442,6 +480,126 @@
             });
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 1. Inicialización: Marcar tickets ya aceptados
+            document.querySelectorAll(".ticket-card").forEach(card => {
+                const numeroOrden = card.querySelector(".btn-aceptar").getAttribute("data-numero-orden");
+                if (localStorage.getItem(`ticket-aceptado-${numeroOrden}`)) {
+                    marcarComoAceptado(card);
+                }
+            });
+
+            // 2. Manejador para abrir modal
+            document.querySelectorAll(".btn-aceptar").forEach(button => {
+                button.addEventListener("click", function () {
+                    const card = this.closest('.ticket-card');
+                    const numeroOrden = this.getAttribute("data-numero-orden");
+                    const descripcion = this.getAttribute("data-descripcion");
+
+                    if (!numeroOrden) {
+                        alert("⚠️ Error: Número de orden no encontrado.");
+                        return;
+                    }
+
+                    // Si ya está aceptado, no hacer nada
+                    if (card.classList.contains('ticket-aceptado')) {
+                        return;
+                    }
+
+                    document.getElementById("modalNumeroOrden").textContent = numeroOrden;
+                    document.getElementById("modalDescripcion").textContent = descripcion;
+
+                    // Guardar referencia al card actual en el modal
+                    document.getElementById("modalAceptarTicket").dataset.cardId = numeroOrden;
+
+                    let modal = new bootstrap.Modal(document.getElementById("modalAceptarTicket"));
+                    modal.show();
+                });
+            });
+
+            // 3. Confirmar aceptación
+            document.getElementById("btnConfirmarAceptar").addEventListener("click", async function () {
+                const modal = document.getElementById("modalAceptarTicket");
+                const numeroOrden = modal.querySelector("#modalNumeroOrden").textContent;
+                const card = document.querySelector(`.btn-aceptar[data-numero-orden="${numeroOrden}"]`).closest('.ticket-card');
+
+                if (!numeroOrden) {
+                    alert("⚠️ Error: No se encontró el número de orden.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch("/VisualizarTicket/AceptarTicket", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify(numeroOrden)
+                    });
+
+                    const mensaje = await response.text();
+
+                    if (response.ok) {
+                        // Marcar visualmente como aceptado
+                        marcarComoAceptado(card);
+
+                        // Almacenar en localStorage
+                        localStorage.setItem(`ticket-aceptado-${numeroOrden}`, 'true');
+
+                        // Mostrar notificación toast
+                        mostrarToast(mensaje);
+                    } else {
+                        throw new Error(mensaje);
+                    }
+
+                    // Cerrar modal
+                    bootstrap.Modal.getInstance(modal).hide();
+
+                } catch (error) {
+                    console.error("❌ Error:", error);
+                    alert(`❌ Error al aceptar ticket: ${error.message}`);
+                }
+            });
+
+            // Funciones auxiliares
+            function marcarComoAceptado(card) {
+                card.classList.add('ticket-aceptado');
+                const btn = card.querySelector('.btn-aceptar');
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Aceptado';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-success');
+                btn.disabled = true;
+            }
+
+            function mostrarToast(mensaje) {
+                const toastHTML = `
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header bg-success text-white">
+                                <strong class="me-auto">Éxito</strong>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">${mensaje}</div>
+                        </div>
+                    </div>`;
+
+                const toastContainer = document.createElement('div');
+                toastContainer.innerHTML = toastHTML;
+                document.body.appendChild(toastContainer);
+
+                setTimeout(() => {
+                    toastContainer.querySelector('.toast').classList.remove('show');
+                    setTimeout(() => toastContainer.remove(), 500);
+                }, 3000);
+            }
+        });
+</script>
+
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

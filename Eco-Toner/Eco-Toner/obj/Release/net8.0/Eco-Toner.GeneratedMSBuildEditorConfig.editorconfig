@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Eco_Toner
 build_property.RootNamespace = Eco_Toner
@@ -26,6 +34,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Dashboard/DashboardSC.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZFNDLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Dashboard/DashboardTA.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZFRBLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Dashboard/DashboardTR.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZFRSLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Dashboard/DashboardTT.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXERhc2hib2FyZFRULmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/FormularioTicket/FormularioTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYXJpb1RpY2tldFxGb3JtdWxhcmlvVGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -34,12 +62,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/ReporteImpresora/ImpresorasConErrores.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0ZUltcHJlc29yYVxJbXByZXNvcmFzQ29uRXJyb3Jlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/VisualizarTicket/VisualizarTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmlzdWFsaXphclRpY2tldFxWaXN1YWxpemFyVGlja2V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Escritorio/Eco-Toner/Eco-Toner/Eco-Toner/Views/_ViewImports.cshtml]

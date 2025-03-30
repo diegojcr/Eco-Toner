@@ -77,6 +77,34 @@ namespace Eco_Toner.Controllers
             return RedirectToAction("VisualizarTicket");
         }
 
+        [HttpPost]
+        public IActionResult AceptarTicket([FromBody] string numeroOrden)
+        {
+            // Obtener el usuario de la sesión
+            var usuario = HttpContext.Session.GetString("Usuario");
+            ViewBag.usuario = usuario;
+
+            if (string.IsNullOrEmpty(usuario))
+            {
+                return BadRequest("El usuario no está autenticado.");
+            }
+
+            try
+            {
+                Console.WriteLine("Número de orden recibido: " + numeroOrden);
+
+                _context.Database.ExecuteSqlRaw(
+                    "EXEC SP_ACEPTAR_TICKET @USARIO, @NUMERO_ORDEN",
+                    new SqlParameter("@USARIO", usuario),
+                    new SqlParameter("@NUMERO_ORDEN", numeroOrden));
+
+                return Ok("Ticket aceptado correctamente.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error al aceptar el ticket: " + ex.Message);
+            }
+        }
 
     }
 }
