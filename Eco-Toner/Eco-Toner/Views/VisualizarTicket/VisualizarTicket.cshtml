@@ -303,11 +303,11 @@
                                     <p><strong>Numero de Serie:</strong> @ticket.Numero_Serie</p>
                                     <p><strong>Nombre de Modelo:</strong> @ticket.Nombre_Modelo</p>
                                     <button class="btn btn-primary" onclick="verDetalle('@ticket.numero_orden','@ticket.Numero_Serie', '@ticket.Nombre_Modelo', '@ticket.NombreCliente', '@ticket.ApellidoCliente', '@ticket.Empresa', '@ticket.Dirección', '@ticket.Descripción', '@ticket.NombreTecnico', '@ticket.ApellidoTecnico', '@ticket.Fecha_Asignación' )">Detalle</button>
-                                    <button class="btn btn-danger">Borrar Ticket</button>
                                     <button class="btn btn-aceptar" data-numero-orden="@ticket.numero_orden" data-descripcion="@ticket.Descripción">
                                         Aceptar Ticket
                                     </button>
-                                    <button class="btn btn-info">Status Ticket</button>
+                                    <button class="btn btn-danger" data-numero-orden="@ticket.numero_orden">Finalizar Ticket</button>
+                                    <!--<button class="btn btn-info">Status Ticket</button>-->
                                     <button class="btn btn-escalar"
                                             data-numero-orden="@ticket.numero_orden"
                                             data-numero-serie="@ticket.Numero_Serie"
@@ -598,6 +598,108 @@
             }
         });
 </script>
+
+    <!-- Modal Finalizar Ticket -->
+    <div class="modal fade" id="modalFinalizarTicket" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Finalización</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea finalizar el siguiente ticket?</p>
+                    <p><strong>Número de Orden:</strong> <span id="modalNumeroOrdenFinalizar"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="btnConfirmarFinalizar">Finalizar Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".btn-danger").forEach(button => {
+                button.addEventListener("click", function () {
+                    const numeroOrden = this.closest('.ticket-card').querySelector(".btn-danger").getAttribute("data-numero-orden");
+                    document.getElementById("modalNumeroOrdenFinalizar").textContent = numeroOrden;
+                    let modal = new bootstrap.Modal(document.getElementById("modalFinalizarTicket"));
+                    modal.show();
+                });
+            });
+
+            document.getElementById("btnConfirmarFinalizar").addEventListener("click", async function () {
+                const modal = document.getElementById("modalFinalizarTicket");
+                const numeroOrden = modal.querySelector("#modalNumeroOrdenFinalizar").textContent;
+                const card = document.querySelector(`.btn-aceptar[data-numero-orden="${numeroOrden}"]`).closest('.ticket-card');
+
+                if (!numeroOrden) {
+                    alert("⚠️ Error: No se encontró el número de orden.");
+                    return;
+                }
+
+                try {
+                    const response = await fetch("/VisualizarTicket/FinalizarTicket", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]').value
+                        },
+                        body: JSON.stringify(numeroOrden)
+                    });
+
+                    const mensaje = await response.text();
+
+                    if (response.ok) {
+                        marcarComoFinalizado(card);
+                        mostrarToast(mensaje, "danger");
+                        localStorage.setItem(`ticket-finalizado-${numeroOrden}`, 'true');
+                    } else {
+                        throw new Error(mensaje);
+                    }
+
+                    bootstrap.Modal.getInstance(modal).hide();
+                } catch (error) {
+                    console.error("❌ Error:", error);
+                    alert(`❌ Error al finalizar ticket: ${error.message}`);
+                }
+            });
+
+            function marcarComoFinalizado(card) {
+                card.classList.add('ticket-finalizado');
+                const btn = card.querySelector('.btn-danger');
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> Finalizado';
+                btn.classList.remove('btn-danger');
+                btn.classList.add('btn-secondary');
+                btn.disabled = true;
+            }
+
+            function mostrarToast(mensaje, tipo) {
+                const toastHTML = `
+                        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+                            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header bg-${tipo} text-white">
+                                    <strong class="me-auto">Éxito</strong>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body">${mensaje}</div>
+                            </div>
+                        </div>`;
+
+                const toastContainer = document.createElement('div');
+                toastContainer.innerHTML = toastHTML;
+                document.body.appendChild(toastContainer);
+
+                setTimeout(() => {
+                    toastContainer.querySelector('.toast').classList.remove('show');
+                    setTimeout(() => toastContainer.remove(), 500);
+                }, 3000);
+            }
+        });
+    </script>
+
 
 
 
