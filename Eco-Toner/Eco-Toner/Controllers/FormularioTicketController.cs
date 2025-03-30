@@ -53,7 +53,7 @@ namespace Eco_Toner.Controllers
                                  $"<b>Descripción:</b> {crearTicket.Descripcion} <br><br>" +
                                  $"Por favor, revisa el sistema.";
 
-                await _emailService.EnviarCorreoAsync("ecotonernotificaciones@gmail.com", asunto, mensaje);
+                await _emailService.EnviarCorreoAsync("jdanyalvarado43@gmail.com", asunto, mensaje);
 
                 TempData["MensajeExitoCrearTicket"] = "Ticket creado y notificación enviada al técnico.";
                 return View();

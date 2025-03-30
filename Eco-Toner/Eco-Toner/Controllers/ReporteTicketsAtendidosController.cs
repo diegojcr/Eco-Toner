@@ -7,38 +7,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Eco_Toner.Controllers
 {
-
     [ValidarSesion]
-    public class ReporteImpresoraController : Controller
+    public class ReporteTicketsAtendidosController : Controller
     {
         private readonly DbAb6668EcotonerContext _context;
 
-        public ReporteImpresoraController(DbAb6668EcotonerContext context)
+        public ReporteTicketsAtendidosController(DbAb6668EcotonerContext context)
         {
             _context = context;
         }
-
-        public IActionResult ImpresorasConErrores(FiltroFechas filtro, bool aplicarFiltro = false)
+        public IActionResult TicketsAtendidos(FiltroFechasTicketsAtendidos filtro, bool aplicarFiltro = false)
         {
             //Obtener el usuario de la sesion
             var usuario = HttpContext.Session.GetString("Usuario");
             //Pasar ese usuario a la vista
             ViewBag.usuario = usuario;
 
-            
-
-
-
             // Cuando no se ha aplicado filtro (primera vez que entra)
             if (!aplicarFiltro)
             {
-                var reporteCompleto = _context.Database
-                    .SqlQueryRaw<ReporteImpresora>("EXEC SP_REPORTEIMPRESORAS")
-                    .AsEnumerable()
-                    .ToList();
-
-                ViewBag.Filtro = new FiltroFechas();
-                return View(reporteCompleto);
+                return View();
             }
             else
             {
@@ -51,23 +39,34 @@ namespace Eco_Toner.Controllers
 
                 // Filtrar por fechas
                 var reporteFiltrado = _context.Database
-                    .SqlQueryRaw<ReporteImpresora>(
-                        "EXEC SP_REPORTEIMPRESORAS_FECHAS @FECHA_INICIO, @FECHA_FIN",
+                    .SqlQueryRaw<ReporteTicketsAtendidos>(
+                        "EXEC SP_REPORTE_TICKETS @FECHA_INICIO, @FECHA_FIN",
                         new SqlParameter("@FECHA_INICIO", filtro.FechaInicio),
                         new SqlParameter("@FECHA_FIN", filtro.FechaFin)
                     )
                     .AsEnumerable()
                     .ToList();
-
+                int cantidadTickets = reporteFiltrado.Count;
+                // Crear el modelo unificado y asegurarse de que las listas no sean null
+                var model = new ReporteTicketsAtendidosViewModel
+                {
+                    Reportes = reporteFiltrado ?? new List<ReporteTicketsAtendidos>(),
+                };
                 ViewBag.Filtro = filtro;
                 ViewBag.AplicarFiltro = true;
-                return View(reporteFiltrado);
+                //mandar a la vista la cantidad de tickets que hay
+                ViewBag.CantidadTickets = cantidadTickets;
+                return View(model);
+
+
             }
+
+            
         }
         [HttpPost]
-        public IActionResult Filtrar(FiltroFechas filtro)
+        public IActionResult Filtrar(FiltroFechasTicketsAtendidos filtro)
         {
-            return RedirectToAction("ImpresorasConErrores", new { filtro = filtro, aplicarFiltro = true });
+            return RedirectToAction("TicketsAtendidos", new { filtro = filtro, aplicarFiltro = true });
         }
     }
 }
