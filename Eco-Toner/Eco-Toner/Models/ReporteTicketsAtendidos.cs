@@ -18,8 +18,5 @@
         public DateTime? FechaFin { get; set; } = DateTime.Now;
     }
 
-    public class ReporteTicketsAtendidosViewModel
-    {
-        public List<ReporteTicketsAtendidos> Reportes { get; set; } = new List<ReporteTicketsAtendidos>();
-    }
+    
 }

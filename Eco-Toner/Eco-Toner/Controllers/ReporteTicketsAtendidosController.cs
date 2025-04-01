@@ -36,28 +36,36 @@ namespace Eco_Toner.Controllers
                     ModelState.AddModelError("", "La fecha fin no puede ser menor a la fecha inicio");
                     filtro.FechaFin = filtro.FechaInicio;
                 }
-
-                // Filtrar por fechas
-                var reporteFiltrado = _context.Database
-                    .SqlQueryRaw<ReporteTicketsAtendidos>(
-                        "EXEC SP_REPORTE_TICKETS @FECHA_INICIO, @FECHA_FIN",
-                        new SqlParameter("@FECHA_INICIO", filtro.FechaInicio),
-                        new SqlParameter("@FECHA_FIN", filtro.FechaFin)
-                    )
-                    .AsEnumerable()
-                    .ToList();
-                int cantidadTickets = reporteFiltrado.Count;
-                // Crear el modelo unificado y asegurarse de que las listas no sean null
-                var model = new ReporteTicketsAtendidosViewModel
+                // Validar fechas
+                if (filtro.FechaInicio == null || filtro.FechaFin == null)
                 {
-                    Reportes = reporteFiltrado ?? new List<ReporteTicketsAtendidos>(),
-                };
-                ViewBag.Filtro = filtro;
-                ViewBag.AplicarFiltro = true;
-                //mandar a la vista la cantidad de tickets que hay
-                ViewBag.CantidadTickets = cantidadTickets;
-                return View(model);
-
+                    return BadRequest("Las fechas no pueden estar vacías.");
+                }
+                try {
+                    // Filtrar por fechas
+                    var reporteFiltrado = _context.Database
+                        .SqlQueryRaw<ReporteTicketsAtendidos>(
+                            "EXEC SP_REPORTE_TICKETS @FECHA_INICIO, @FECHA_FIN",
+                            new SqlParameter("@FECHA_INICIO", filtro.FechaInicio),
+                            new SqlParameter("@FECHA_FIN", filtro.FechaFin)
+                        )
+                        .AsEnumerable()
+                        .ToList();
+                    int cantidadTickets = reporteFiltrado.Count;
+                    // Crear el modelo unificado y asegurarse de que las listas no sean null
+                    var model = new ReporteTicketsAtendidosViewModel
+                    {
+                        Reportes = reporteFiltrado ?? new List<ReporteTicketsAtendidos>(),
+                    };
+                    ViewBag.Filtro = filtro;
+                    ViewBag.AplicarFiltro = true;
+                    //mandar a la vista la cantidad de tickets que hay
+                    ViewBag.CantidadTickets = cantidadTickets;
+                    return View(model);
+                } catch(Exception ex)
+                {
+                    return StatusCode(500, "Error en la consulta: " + ex.Message);
+                }
 
             }
 
@@ -66,7 +74,7 @@ namespace Eco_Toner.Controllers
         [HttpPost]
         public IActionResult Filtrar(FiltroFechasTicketsAtendidos filtro)
         {
-            return RedirectToAction("TicketsAtendidos", new { filtro = filtro, aplicarFiltro = true });
+            return RedirectToAction("TicketsAtendidos", new { filtro.FechaInicio,filtro.FechaFin, aplicarFiltro = true });
         }
     }
 }

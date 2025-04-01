@@ -27,7 +27,7 @@ namespace Eco_Toner.Controllers
             {
                 return View();
             }
-
+            
             // Validar fechas
             if (filtro.FechaInicio == null || filtro.FechaFin == null)
             {

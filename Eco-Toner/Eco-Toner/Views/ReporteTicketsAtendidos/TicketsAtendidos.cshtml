@@ -4,8 +4,6 @@
 @model ReporteTicketsAtendidosViewModel
 @{
     ViewData["Title"] = "Reporte de Tickets Atendidos";
-    var filtro = ViewBag.Filtro as Eco_Toner.Models.FiltroFechasTicketsAtendidos ?? new Eco_Toner.Models.FiltroFechasTicketsAtendidos();
-    bool aplicarFiltro = ViewBag.AplicarFiltro ?? false;
 }
 
 <!DOCTYPE html>
@@ -383,14 +381,14 @@
             <div class="filtro-group">
                 <label for="FechaInicio" class="form-label">Fecha Inicio</label>
                 <input type="date" class="form-control" id="FechaInicio" name="FechaInicio"
-                       value="@(filtro.FechaInicio?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
+                           value="@(ViewBag.Filtro?.FechaInicio?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
                        max="@DateTime.Now.ToString("yyyy-MM-dd")">
             </div>
 
             <div class="filtro-group">
                 <label for="FechaFin" class="form-label">Fecha Fin</label>
                 <input type="date" class="form-control" id="FechaFin" name="FechaFin"
-                       value="@(filtro.FechaFin?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
+                           value="@(ViewBag.Filtro?.FechaFin?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
                        max="@DateTime.Now.ToString("yyyy-MM-dd")">
             </div>
 
@@ -398,7 +396,7 @@
                 <button type="submit" class="btn-filtrar">
                     <i class="bi bi-funnel-fill"></i> Filtrar
                 </button>
-                @if (aplicarFiltro)
+                    @if (ViewBag.AplicarFiltro == true)
                 {
                     <a href="@Url.Action("TicketsAtendidos")" class="btn-limpiar">
                         <i class="bi bi-arrow-counterclockwise"></i> Limpiar
@@ -437,11 +435,11 @@
                         </div>
                     }
                     <!-- Mostrar rango de fechas filtrado -->
-                    @if (aplicarFiltro)
+                        @if (ViewBag.AplicarFiltro == true)
                     {
                         <div class="text-muted mt-3">
-                            Mostrando resultados del @(filtro.FechaInicio?.ToShortDateString() ?? "Sin fecha")
-                            al @(filtro.FechaFin?.ToShortDateString() ?? "Sin fecha")
+                                Mostrando resultados del @(ViewBag.Filtro?.FechaInicio?.ToShortDateString() ?? "Sin fecha")
+                                al @(ViewBag.Filtro?.FechaFin?.ToShortDateString() ?? "Sin fecha")
 
 
                         </div>
