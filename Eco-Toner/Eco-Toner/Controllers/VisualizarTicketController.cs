@@ -52,6 +52,9 @@ namespace Eco_Toner.Controllers
 
         }
 
+        
+
+
         public IActionResult EscalarTicket(EscalarTicket EscalarTicket)
         {
             //Obtener el usuario de la sesion
