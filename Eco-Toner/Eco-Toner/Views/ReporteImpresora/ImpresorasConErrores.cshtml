@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model List<Eco_Toner.Models.ReporteImpresora> 
+@model ReporteImpresoraViewModel
 
 @{
     ViewData["Title"] = "Impresoras mas problematicas";
@@ -344,13 +344,13 @@
         </div>
 
         <!-- Mensaje cuando no hay datos (solo mostrar cuando se ha aplicado filtro) -->
-        @if (aplicarFiltro && !Model.Any())
+        @if (aplicarFiltro && !Model.ReporteImpresora.Any())
         {
             <div class="alert alert-info">
                 No se encontraron impresoras con errores en el rango de fechas seleccionado.
             </div>
         }
-        else if (Model.Any())
+        else if (Model.ReporteImpresora.Any())
         {
             <!-- Tabla de resultados -->
             <div class="table-responsive">
@@ -363,7 +363,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.ReporteImpresora)
                         {
                             <tr>
                                 <td>@item.NombreModelo</td>

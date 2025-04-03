@@ -36,9 +36,12 @@ namespace Eco_Toner.Controllers
                     .SqlQueryRaw<ReporteImpresora>("EXEC SP_REPORTEIMPRESORAS")
                     .AsEnumerable()
                     .ToList();
-
+                var model = new ReporteImpresoraViewModel
+                {
+                    ReporteImpresora = reporteCompleto ?? new List<ReporteImpresora>(),
+                };
                 ViewBag.Filtro = new FiltroFechas();
-                return View(reporteCompleto);
+                return View(model);
             }
             else
             {
@@ -58,16 +61,20 @@ namespace Eco_Toner.Controllers
                     )
                     .AsEnumerable()
                     .ToList();
+                var model = new ReporteImpresoraViewModel
+                {
+                    ReporteImpresora = reporteFiltrado ?? new List<ReporteImpresora>(),
+                };
 
                 ViewBag.Filtro = filtro;
                 ViewBag.AplicarFiltro = true;
-                return View(reporteFiltrado);
+                return View(model);
             }
         }
         [HttpPost]
         public IActionResult Filtrar(FiltroFechas filtro)
         {
-            return RedirectToAction("ImpresorasConErrores", new { filtro = filtro, aplicarFiltro = true });
+            return RedirectToAction("ImpresorasConErrores", new { filtro.FechaInicio, filtro.FechaFin, aplicarFiltro = true });
         }
     }
 }
