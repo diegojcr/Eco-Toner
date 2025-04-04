@@ -43,25 +43,41 @@ namespace Eco_Toner.Controllers
                 }
                 try
                 {
-                    // Filtrar por fechas
-                    var reporteFiltrado = _context.Database
-                        .SqlQueryRaw<ReporteTicketsAtendidos>(
-                            "EXEC SP_REPORTE_TICKETS @FECHA_INICIO, @FECHA_FIN",
-                            new SqlParameter("@FECHA_INICIO", filtro.FechaInicio),
-                            new SqlParameter("@FECHA_FIN", filtro.FechaFin)
-                        )
-                        .AsEnumerable()
-                        .ToList();
+                    List<ReporteTicketsAtendidos> reporteFiltrado;
+
+                    // Si hay número de orden, usar ese filtro
+                    if (!string.IsNullOrEmpty(filtro.NumeroOrden))
+                    {
+                        reporteFiltrado = _context.Database
+                            .SqlQueryRaw<ReporteTicketsAtendidos>(
+                                "EXEC SP_REPORTE_TICKETS_NUMERO_ORDEN @NUMERO_ORDEN",
+                                new SqlParameter("@NUMERO_ORDEN", filtro.NumeroOrden)
+                            )
+                            .AsEnumerable()
+                            .ToList();
+                    }
+                    else // Si no, filtrar por fechas
+                    {
+                        reporteFiltrado = _context.Database
+                            .SqlQueryRaw<ReporteTicketsAtendidos>(
+                                "EXEC SP_REPORTE_TICKETS @FECHA_INICIO, @FECHA_FIN",
+                                new SqlParameter("@FECHA_INICIO", filtro.FechaInicio),
+                                new SqlParameter("@FECHA_FIN", filtro.FechaFin)
+                            )
+                            .AsEnumerable()
+                            .ToList();
+                    }
+
                     int cantidadTickets = reporteFiltrado.Count;
-                    // Crear el modelo unificado y asegurarse de que las listas no sean null
                     var model = new ReporteTicketsAtendidosViewModel
                     {
                         Reportes = reporteFiltrado ?? new List<ReporteTicketsAtendidos>(),
                     };
+
                     ViewBag.Filtro = filtro;
                     ViewBag.AplicarFiltro = true;
-                    //mandar a la vista la cantidad de tickets que hay
                     ViewBag.CantidadTickets = cantidadTickets;
+
                     return View(model);
                 }
                 catch (Exception ex)
@@ -158,11 +174,23 @@ namespace Eco_Toner.Controllers
         [HttpPost]
         public IActionResult Filtrar(FiltroFechasTicketsAtendidos filtro)
         {
-            return RedirectToAction("TicketsAtendidos", new { filtro.FechaInicio,filtro.FechaFin, aplicarFiltro = true });
+            return RedirectToAction("TicketsAtendidos", new
+            {
+                filtro.FechaInicio,
+                filtro.FechaFin,
+                filtro.NumeroOrden,
+                aplicarFiltro = true
+            });
         }
         public IActionResult FiltrarSC(FiltroFechasTicketsAtendidos filtro)
         {
-            return RedirectToAction("TicketsAtendidosSC", new { filtro.FechaInicio, filtro.FechaFin, aplicarFiltro = true });
+            return RedirectToAction("TicketsAtendidosSC", new
+            {
+                filtro.FechaInicio,
+                filtro.FechaFin,
+                filtro.NumeroOrden,
+                aplicarFiltro = true
+            });
         }
     }
 }

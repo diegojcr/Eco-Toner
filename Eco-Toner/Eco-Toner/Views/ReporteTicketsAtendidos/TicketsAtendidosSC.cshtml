@@ -350,6 +350,25 @@
             font-size: 14px;
             cursor: pointer;
         }
+        /* Ajustes para el nuevo campo de filtro */
+        .filtro-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        /* Mensaje de resultados */
+        .num-Tickets {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 500;
+            color: #116244;
+        }
+
+        .text-muted {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
 
 
     </style>
@@ -360,6 +379,9 @@
         <ul class="menu">
             <li><a href="@Url.Action("FormularioTicket","FormularioTicket")">Crear Ticket</a></li>
             <li><a href="@Url.Action("TicketsAtendidosSC","ReporteTicketsAtendidos")">Reporte de Tickets</a></li>
+
+            <li><a href="@Url.Action("IngresoCliente","IngresoCliente")">Registrar Cliente</a></li>
+
         </ul>
     </div>
     <div class="main-container">
@@ -391,6 +413,12 @@
                            max="@DateTime.Now.ToString("yyyy-MM-dd")">
                 </div>
 
+                <div class="filtro-group">
+                    <label for="NumeroOrden" class="form-label">Número de Orden</label>
+                    <input type="text" class="form-control" id="NumeroOrden" name="NumeroOrden"
+                           value="@ViewBag.Filtro?.NumeroOrden" placeholder="Ej: ECO-12345">
+                </div>
+
                 <div class="filtro-buttons">
                     <button type="submit" class="btn-filtrar">
                         <i class="bi bi-funnel-fill"></i> Filtrar
@@ -413,8 +441,8 @@
                 <div class="row">
                     @if (Model != null && Model.Reportes.Any())
                     {
-                        <span class="num-Tickets">En total hay @ViewBag.CantidadTickets tickets atendidos</span>
-                        foreach (var ticket in Model.Reportes)
+                        <span class="num-Tickets">En total hay @ViewBag.CantidadTickets tickets @(string.IsNullOrEmpty(ViewBag.Filtro?.NumeroOrden) ? "" : $"con el número {ViewBag.Filtro.NumeroOrden}")</span>
+                            foreach (var ticket in Model.Reportes)
                         {
                             <div class="col-md-6">
                                 <div class="card ticket-card">
@@ -433,14 +461,21 @@
                                 </div>
                             </div>
                         }
-                        <!-- Mostrar rango de fechas filtrado -->
+                        <!-- Mostrar rango de fechas o número de orden -->
                         @if (ViewBag.AplicarFiltro == true)
                         {
                             <div class="text-muted mt-3">
-                                Mostrando resultados del @(ViewBag.Filtro?.FechaInicio?.ToShortDateString() ?? "Sin fecha")
-                                al @(ViewBag.Filtro?.FechaFin?.ToShortDateString() ?? "Sin fecha")
-
-
+                                @if (!string.IsNullOrEmpty(ViewBag.Filtro?.NumeroOrden))
+                                {
+                                    <span>Mostrando resultados para el número de orden: <strong>@ViewBag.Filtro.NumeroOrden</strong></span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        Mostrando resultados del @(ViewBag.Filtro?.FechaInicio?.ToShortDateString() ?? "Sin fecha")
+                                        al @(ViewBag.Filtro?.FechaFin?.ToShortDateString() ?? "Sin fecha")
+                                    </span>
+                                }
                             </div>
                         }
                     }

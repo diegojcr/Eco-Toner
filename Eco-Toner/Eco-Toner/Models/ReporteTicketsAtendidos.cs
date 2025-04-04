@@ -16,6 +16,7 @@
     {
         public DateTime? FechaInicio { get; set; } = DateTime.Now.AddMonths(-1);
         public DateTime? FechaFin { get; set; } = DateTime.Now;
+        public string NumeroOrden { get; set; }
     }
 
     

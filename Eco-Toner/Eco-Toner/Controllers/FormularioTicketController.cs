@@ -56,17 +56,7 @@ namespace Eco_Toner.Controllers
             ViewBag.usuario = usuario;
             try
             {
-                // Validar que los correos seleccionados existan en las listas
-                var clienteValido = model.Clientes?.Any(c => c.CORREOCLIENTE == model.CrearTicket.Correo_Cliente) ?? false;
-                var tecnicoValido = model.Tecnicos?.Any(t => t.Correo == model.CrearTicket.Correo_Tecnico) ?? false;
-
-                if (!clienteValido || !tecnicoValido)
-                {
-                    TempData["MensajeErrorCrearTicket"] = "Por favor seleccione un cliente y técnico válidos";
-                    model.Tecnicos = await _context.Database.SqlQueryRaw<TecnicoViewModel>("EXEC SP_VERTECNICO").ToListAsync();
-                    model.Clientes = await _context.Database.SqlQueryRaw<ClienteViewModel>("EXEC SP_VER_CLEINTE").ToListAsync();
-                    return View(model);
-                }
+                
 
                 // Ejecutar el SP
                 _context.Database.ExecuteSqlRaw(
@@ -84,7 +74,7 @@ namespace Eco_Toner.Controllers
                                  $"<b>Descripción:</b> {model.CrearTicket.Descripcion} <br><br>" +
                                  $"Por favor, revisa el sistema.";
 
-                await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asunto, mensaje);
+                await _emailService.EnviarCorreoAsync("jdanyalvarado43@gmail.com", asunto, mensaje);
 
                 //Enviar correo a cliente
                 string asuntoCliente = "Nuevo Ticket registrado";
@@ -94,7 +84,7 @@ namespace Eco_Toner.Controllers
                                  $"<b>Descripción:</b> {model.CrearTicket.Descripcion} <br><br>" +
                                  $"Gracias por confiar en nosotros";
 
-                await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asuntoCliente, mensajeCliente);
+                await _emailService.EnviarCorreoAsync("analisisejemplo0@gmail.com", asuntoCliente, mensajeCliente);
 
                 TempData["MensajeExitoCrearTicket"] = "Ticket creado y notificación enviada al técnico y al cliente";
                 return RedirectToAction("FormularioTicket");

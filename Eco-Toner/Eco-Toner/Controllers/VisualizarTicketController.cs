@@ -99,7 +99,7 @@ namespace Eco_Toner.Controllers
                 <p>Gracias por su paciencia y comprensión.</p>
                 <p>Atentamente,<br>El Equipo de Soporte Técnico</p>";
 
-                    await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asuntoCliente, mensajeCliente);
+                    await _emailService.EnviarCorreoAsync("analisisejemplo0@gmail.com", asuntoCliente, mensajeCliente);
 
                     // 4. Enviar correo al nuevo técnico
                     string asuntoTecnico = $"Ticket Escalado a tu nombre - {EscalarTicket.numero_orden}";
@@ -117,7 +117,7 @@ namespace Eco_Toner.Controllers
                 
                 <p>Por favor, revisa el sistema para atender este ticket lo antes posible.</p>";
 
-                    await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asuntoTecnico, mensajeTecnico);
+                    await _emailService.EnviarCorreoAsync("jdanyalvarado43@gmail.com", asuntoTecnico, mensajeTecnico);
                 }
 
                 TempData["MensajeExitoCrearTicket"] = "Ticket escalado con éxito y notificaciones enviadas";
@@ -181,7 +181,7 @@ namespace Eco_Toner.Controllers
                 <p>Gracias por confiar en nuestros servicios.</p>
                 <p>Atentamente,<br>El Equipo de Soporte Técnico</p>";
 
-                    await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asunto, mensaje);
+                    await _emailService.EnviarCorreoAsync("analisisejemplo0@gmail.com", asunto, mensaje);
                 }
                 return Ok(new { success = true, message = "Ticket aceptado y notificación enviada al cliente." });
             }
@@ -240,7 +240,7 @@ namespace Eco_Toner.Controllers
                 <p>Gracias por confiar en nuestros servicios.</p>
                 <p>Atentamente,<br>El Equipo de Soporte Técnico</p>";
 
-                    await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asunto, mensaje);
+                    await _emailService.EnviarCorreoAsync("analisisejemplo0@gmail.com", asunto, mensaje);
                 }
 
                 return Ok(new { success = true, message = "Ticket finalizado y notificación enviada al cliente." });

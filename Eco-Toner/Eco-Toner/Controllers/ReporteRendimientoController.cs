@@ -19,9 +19,9 @@ namespace Eco_Toner.Controllers
 
         public IActionResult ReporteRendimiento(FiltroRendimiento filtro, bool aplicarFiltro = false)
         {
-            // Obtener el usuario enviado desde el formulario (NO el de la sesión)
-            ViewBag.usuario = filtro.Usuario;
-
+           var usuario = HttpContext.Session.GetString("Usuario");
+            ViewBag.usuario = usuario;
+            ViewBag.User = filtro.Usuario;
             // Si no se aplica filtro, solo mostrar la vista vacía
             if (!aplicarFiltro)
             {
@@ -60,7 +60,7 @@ namespace Eco_Toner.Controllers
 
                 ViewBag.Filtro = filtro;
                 ViewBag.AplicarFiltro = true;
-
+                ViewBag.CantidadTrabajos = reporteFiltrado.Count;
                 return View(model);
             }
             catch (Exception ex)
