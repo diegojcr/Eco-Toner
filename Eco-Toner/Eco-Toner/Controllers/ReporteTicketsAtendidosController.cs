@@ -71,6 +71,33 @@ namespace Eco_Toner.Controllers
 
             
         }
+
+        [HttpGet]
+        public IActionResult ObtenerDetalleTicket(string numeroOrden)
+        {
+            try
+            {
+                var detalle = _context.Database
+                    .SqlQueryRaw<DetalleTicket>(
+                        "EXEC SP_VER_DETALLE_TICKET @NUMERO_ORDEN",
+                        new SqlParameter("@NUMERO_ORDEN", numeroOrden)
+                    )
+                    .AsEnumerable()
+                    .FirstOrDefault();
+
+                if (detalle == null)
+                {
+                    return NotFound("No se encontraron detalles para este ticket.");
+                }
+
+                return PartialView("_DetalleTicketPartial", detalle);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error al obtener el detalle: " + ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Filtrar(FiltroFechasTicketsAtendidos filtro)
         {

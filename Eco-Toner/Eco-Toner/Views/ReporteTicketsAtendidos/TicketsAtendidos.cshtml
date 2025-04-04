@@ -428,7 +428,7 @@
                                     <p><strong>Empresa: </strong> @ticket.Empresa</p>
                                     <p><strong>Fecha de inicio: </strong> @ticket.Fecha_Inicio</p>
                                     <p><strong>Fecha de Fin: </strong> @ticket.Fecha_Fin</p>
-                                    <button class="btn btn-primary" >Detalle</button>
+                                        <button class="btn btn-primary" data-numero-orden="@ticket.Numero_Orden" onclick="verDetalleTicket(this)">Detalle</button>
                                    
                                 </div>
                             </div>
@@ -458,39 +458,56 @@
         </div>
     </div>
 
-    <!-- Modal Detalle Ticket 
-    <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detalleModalLabel">Detalles del Ticket</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modalDetalleBody"></div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <!-- Modal Detalle Ticket -->
+        <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detalleModalLabel">Detalles del Ticket</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalDetalleBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    -->
-    <script>
-        function verDetalle(numero_orden, numeroSerie, modelo, nombreCliente, apellidoCliente, empresa, direccion, descripcion, nombreTecnico, apellidoTecnico, Fecha_Asignación) {
-            let detalles = `
-                         <p><strong>Numero de Orden:</strong> ${numero_orden}</p>
-                        <p><strong>Numero de Serie:</strong> ${numeroSerie}</p>
-                        <p><strong>Nombre de Modelo:</strong> ${modelo}</p>
-                        <p><strong>Nombre del Cliente:</strong> ${nombreCliente} ${apellidoCliente}</p>
-                        <p><strong>Empresa:</strong> ${empresa}</p>
-                        <p><strong>Dirección:</strong> ${direccion}</p>
-                        <p><strong>Descripción:</strong> ${descripcion}</p>
-                        <p><strong>Técnico:</strong> ${nombreTecnico} ${apellidoTecnico}</p>
-                        <p><strong>Fecha de Asignacion:</strong> ${Fecha_Asignación}</p >`;
-            document.getElementById('modalDetalleBody').innerHTML = detalles;
-            var modal = new bootstrap.Modal(document.getElementById('detalleModal'));
-            modal.show();
-        }
-    </script>
+
+        <script>
+            async function verDetalleTicket(button) {
+                const numeroOrden = button.getAttribute('data-numero-orden');
+
+                try {
+                    // Mostrar spinner o indicador de carga
+                    document.getElementById('modalDetalleBody').innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+
+                    // Usar URL absoluta para evitar problemas de ruta
+                    const baseUrl = window.location.origin;
+                    const response = await fetch(`${baseUrl}/ReporteTicketsAtendidos/ObtenerDetalleTicket?numeroOrden=${encodeURIComponent(numeroOrden)}`);
+
+                    if (!response.ok) {
+                        throw new Error('Error al obtener los detalles');
+                    }
+
+                    const detalleHtml = await response.text();
+                    document.getElementById('modalDetalleBody').innerHTML = detalleHtml;
+
+                    // Mostrar el modal
+                    var modal = new bootstrap.Modal(document.getElementById('detalleModal'));
+                    modal.show();
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('modalDetalleBody').innerHTML = `
+                            <div class="alert alert-danger">
+                                Error al cargar los detalles del ticket. Por favor intente nuevamente.
+                                <div class="mt-2">${error.message}</div>
+                            </div>`;
+                    var modal = new bootstrap.Modal(document.getElementById('detalleModal'));
+                    modal.show();
+                }
+            }
+        </script>
     <!-- Modal Escalar Ticket 
     <div class="modal fade" id="escalarModal" tabindex="-1" aria-labelledby="escalarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
