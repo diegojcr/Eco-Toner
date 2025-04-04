@@ -55,7 +55,17 @@ namespace Eco_Toner.Controllers
 
                 await _emailService.EnviarCorreoAsync("jdanyalvarado43@gmail.com", asunto, mensaje);
 
-                TempData["MensajeExitoCrearTicket"] = "Ticket creado y notificación enviada al técnico.";
+                //Enviar correo a cliente
+                string asuntoCliente = "Nuevo Ticket registrado";
+                string mensajeCliente = $"Hola, se te ha ingresado tu caso en el sistema<br><br>" +
+                                 $"<b>Cliente:</b> {crearTicket.Correo_Cliente} <br>" +
+                                 $"<b>Impresora:</b> {crearTicket.Serie_Impresora} <br>" +
+                                 $"<b>Descripción:</b> {crearTicket.Descripcion} <br><br>" +
+                                 $"Gracias por confiar en nosotros";
+
+                await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asuntoCliente, mensajeCliente);
+
+                TempData["MensajeExitoCrearTicket"] = "Ticket creado y notificación enviada al técnico y al cliente";
                 return View();
             }
             catch (Exception ex)

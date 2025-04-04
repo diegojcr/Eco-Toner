@@ -38,6 +38,31 @@
 
     }
 
+    public class InfoCorreoAceptacion
+    {
+        public string NOMBRETECNICO { get; set; }
+        public string APELLIDOTECNICO { get; set; }
+        public string ESTADO { get; set; }
+        public DateTime? FECHAACEPTADO { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string CORREOCLIENTE { get; set; }
+        public string NOMBRECLIENTE { get; set; }
+    }
+
+    public class InfoCorreoEscalado
+    {
+        public string NOMBRETECNICO { get; set; }       // Nuevo técnico asignado
+        public string APELLIDOTECNICO { get; set; }     // Nuevo técnico asignado
+        public string NOMBREPREVIO { get; set; }        // Técnico anterior
+        public string APELLIDOPREVIO { get; set; }      // Técnico anterior
+        public string ESTADO { get; set; }
+        public DateTime? FECHAACEPTADO { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string CORREOCLIENTE { get; set; }       // Agrega esto si tu SP lo devuelve
+        public string NOMBRECLIENTE { get; set; }        // Agrega esto si tu SP lo devuelve
+        public string CORREOTECNICO { get; set; }        // Agrega esto si tu SP lo devuelve
+    }
+
 
 }
 
