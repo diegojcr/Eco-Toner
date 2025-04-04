@@ -1,7 +1,7 @@
 ﻿@{
     Layout = null;
 }
-@model Eco_Toner.Models.CrearTicket
+@model Eco_Toner.Models.FormularioTicketViewModel
 
 <!DOCTYPE html>
 <html lang="es">
@@ -168,8 +168,16 @@
             <div class="form-section">
                 <h4>Datos Personales</h4>
                 <div class="row">
-                    <div class="col-12">
-                        <input type="text" class="form-control" asp-for="Correo_Cliente" placeholder="Ingrese el correo del Cliente">
+                        <div class="col-12">
+                            <label for="CrearTicket_Correo_Cliente">Cliente:</label>
+                            <select class="form-select" asp-for="CrearTicket.Correo_Cliente" required>
+                                <option value="">Seleccione un cliente...</option>
+                                @foreach (var cliente in Model.Clientes)
+                                {
+                                    <option value="@cliente.CORREOCLIENTE">@cliente.NombreCompleto</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CrearTicket.Correo_Cliente" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -178,17 +186,25 @@
                 <h4>Datos de registro</h4>
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control" asp-for="Serie_Impresora" placeholder="Ingrese el Numero de Serie de la Impresora">
+                            <label for="CrearTicket_Serie_Impresora">Número de Serie de la Impresora:</label>
+                            <input type="text" class="form-control" asp-for="CrearTicket.Serie_Impresora" placeholder="Ingrese el Numero de Serie de la Impresora" required>
+                            <span asp-validation-for="CrearTicket.Serie_Impresora" class="text-danger"></span>
+                        </div>
+                    <div class="col-12">
+                                <label for="CrearTicket_Correo_Tecnico">Técnico:</label>
+                                <select class="form-select" asp-for="CrearTicket.Correo_Tecnico" required>
+                                    <option value="">Seleccione un técnico...</option>
+                                    @foreach (var tecnico in Model.Tecnicos)
+                                    {
+                                        <option value="@tecnico.Correo">@tecnico.NombreCompleto - @tecnico.Rol</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="CrearTicket.Correo_Tecnico" class="text-danger"></span>
                     </div>
                     <div class="col-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" asp-for="Correo_Tecnico" placeholder="Ingrese el Correo del Tecnico">
-                        </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="input-group">
-                            <input type="text" class="form-control" asp-for="Descripcion" placeholder="Descripcion de la falla">
-                        </div>
+                                <label for="CrearTicket_Descripcion">Descripción de la falla:</label>
+                                <textarea class="form-control" asp-for="CrearTicket.Descripcion" placeholder="Descripción de la falla" required></textarea>
+                                <span asp-validation-for="CrearTicket.Descripcion" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -213,5 +229,10 @@
         </div>
     </div>
     </form>
+
+    <!-- Agrega jQuery Validation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
 </body>
 </html>

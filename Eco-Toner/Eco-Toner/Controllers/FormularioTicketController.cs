@@ -20,16 +20,35 @@ namespace Eco_Toner.Controllers
             _emailService = emailService;
         }
 
-        public IActionResult FormularioTicket()
+
+        public async Task<IActionResult> FormularioTicket()
         {
-            //Obtener el usuario de la sesion
             var usuario = HttpContext.Session.GetString("Usuario");
-            //Pasar ese usuario a la vista
             ViewBag.usuario = usuario;
-            return View();
+
+            // Obtener técnicos y clientes
+            var tecnicos = await _context.Database
+                .SqlQueryRaw<TecnicoViewModel>("EXEC SP_VERTECNICO")
+                .AsNoTracking()
+                .ToListAsync();
+
+            var clientes = await _context.Database
+                .SqlQueryRaw<ClienteViewModel>("EXEC SP_VER_CLEINTE")
+                .AsNoTracking()
+                .ToListAsync();
+
+            var model = new FormularioTicketViewModel
+            {
+                CrearTicket = new CrearTicket(),
+                Tecnicos = tecnicos,
+                Clientes = clientes
+            };
+
+            return View(model);
         }
+
         [HttpPost]
-        public async Task <IActionResult> FormularioTicket(CrearTicket crearTicket)
+        public async Task <IActionResult> FormularioTicket(FormularioTicketViewModel model)
         {
             //Obtener el usuario de la sesion
             var usuario = HttpContext.Session.GetString("Usuario");
@@ -37,42 +56,55 @@ namespace Eco_Toner.Controllers
             ViewBag.usuario = usuario;
             try
             {
+                // Validar que los correos seleccionados existan en las listas
+                var clienteValido = model.Clientes?.Any(c => c.CORREOCLIENTE == model.CrearTicket.Correo_Cliente) ?? false;
+                var tecnicoValido = model.Tecnicos?.Any(t => t.Correo == model.CrearTicket.Correo_Tecnico) ?? false;
+
+                if (!clienteValido || !tecnicoValido)
+                {
+                    TempData["MensajeErrorCrearTicket"] = "Por favor seleccione un cliente y técnico válidos";
+                    model.Tecnicos = await _context.Database.SqlQueryRaw<TecnicoViewModel>("EXEC SP_VERTECNICO").ToListAsync();
+                    model.Clientes = await _context.Database.SqlQueryRaw<ClienteViewModel>("EXEC SP_VER_CLEINTE").ToListAsync();
+                    return View(model);
+                }
+
                 // Ejecutar el SP
                 _context.Database.ExecuteSqlRaw(
                     "EXEC SP_NUEVOTICKET @USUARIO, @CORREO_CLIENTE, @SERIE_IMPRESORA, @CORREO_TECNICO, @DESCRIPCION",
                     new SqlParameter("@USUARIO", usuario),
-                    new SqlParameter("@CORREO_CLIENTE", crearTicket.Correo_Cliente),
-                    new SqlParameter("@SERIE_IMPRESORA", crearTicket.Serie_Impresora),
-                    new SqlParameter("@CORREO_TECNICO", crearTicket.Correo_Tecnico),
-                    new SqlParameter("@DESCRIPCION", crearTicket.Descripcion));
+                new SqlParameter("@CORREO_CLIENTE", model.CrearTicket.Correo_Cliente),
+                new SqlParameter("@SERIE_IMPRESORA", model.CrearTicket.Serie_Impresora),
+                new SqlParameter("@CORREO_TECNICO", model.CrearTicket.Correo_Tecnico),
+                new SqlParameter("@DESCRIPCION", model.CrearTicket.Descripcion));
                 // Enviar correo al técnico
                 string asunto = "Nuevo Ticket Asignado";
                 string mensaje = $"Hola, se te ha asignado un nuevo ticket.<br><br>" +
-                                 $"<b>Cliente:</b> {crearTicket.Correo_Cliente} <br>" +
-                                 $"<b>Impresora:</b> {crearTicket.Serie_Impresora} <br>" +
-                                 $"<b>Descripción:</b> {crearTicket.Descripcion} <br><br>" +
+                                 $"<b>Cliente:</b> {model.CrearTicket.Correo_Cliente} <br>" +
+                                 $"<b>Impresora:</b> {model.CrearTicket.Serie_Impresora} <br>" +
+                                 $"<b>Descripción:</b> {model.CrearTicket.Descripcion} <br><br>" +
                                  $"Por favor, revisa el sistema.";
 
-                await _emailService.EnviarCorreoAsync("jdanyalvarado43@gmail.com", asunto, mensaje);
+                await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asunto, mensaje);
 
                 //Enviar correo a cliente
                 string asuntoCliente = "Nuevo Ticket registrado";
-                string mensajeCliente = $"Hola, se te ha ingresado tu caso en el sistema<br><br>" +
-                                 $"<b>Cliente:</b> {crearTicket.Correo_Cliente} <br>" +
-                                 $"<b>Impresora:</b> {crearTicket.Serie_Impresora} <br>" +
-                                 $"<b>Descripción:</b> {crearTicket.Descripcion} <br><br>" +
+                string mensajeCliente = $"Hola, se ha ingresado tu caso en el sistema<br><br>" +
+                                 $"<b>Cliente:</b> {model.CrearTicket.Correo_Cliente} <br>" +
+                                 $"<b>Impresora:</b> {model.CrearTicket.Serie_Impresora} <br>" +
+                                 $"<b>Descripción:</b> {model.CrearTicket.Descripcion} <br><br>" +
                                  $"Gracias por confiar en nosotros";
 
                 await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asuntoCliente, mensajeCliente);
 
                 TempData["MensajeExitoCrearTicket"] = "Ticket creado y notificación enviada al técnico y al cliente";
-                return View();
+                return RedirectToAction("FormularioTicket");
             }
             catch (Exception ex)
             {
-                // Manejo de errores: muestra el mensaje de error en la vista
                 TempData["MensajeErrorCrearTicket"] = "No se pudo crear el ticket: " + ex.Message;
-                return View();
+                model.Tecnicos = await _context.Database.SqlQueryRaw<TecnicoViewModel>("EXEC SP_VERTECNICO").ToListAsync();
+                model.Clientes = await _context.Database.SqlQueryRaw<ClienteViewModel>("EXEC SP_VER_CLEINTE").ToListAsync();
+                return View(model);
             }
         }
     }
