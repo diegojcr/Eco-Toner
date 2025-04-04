@@ -1,0 +1,596 @@
+﻿@{
+    Layout = null;
+}
+@model ReporteTicketsAtendidosViewModel
+@{
+    ViewData["Title"] = "Reporte de Tickets Atendidos";
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Tickets</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+            /* Evita el desplazamiento horizontal */
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: radial-gradient(circle, black, #116244);
+            color: white;
+            padding-top: 20px;
+            position: fixed;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 0 20px 20px 0;
+            z-index: 1000; /* Asegura que esté por encima de otros elementos */
+            top: 0; /* Fija en la parte superior */
+            left: 0;
+        }
+
+            .sidebar h2 {
+                text-align: center;
+                font-size: 24px;
+                text-transform: uppercase;
+                font-weight: bold;
+                font-family: 'Poppins', sans-serif;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            }
+
+        .main-container {
+            margin-left: 250px; /* Igual que el ancho del sidebar */
+            padding-top: 60px; /* Altura de la top-bar */
+        }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+        }
+
+            .menu li {
+                padding: 15px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-left: 4px solid transparent;
+                border-radius: 10px;
+                margin: 5px;
+            }
+
+                .menu li:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    transform: translateX(8px);
+                    border-left: 4px solid #a1e3b0;
+                }
+
+                .menu li a {
+                    color: white;
+                    text-decoration: none;
+                    display: block;
+                    font-weight: 500;
+                    transition: color 0.3s ease;
+                }
+
+        .content-section {
+            margin-left: 40px;
+            padding: 80px 40px 40px;
+            color: #333;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+        /* Contenedor del filtro - posición y márgenes */
+        .filtro-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Botón Filtrar - estilo verde */
+        .btn-filtrar {
+            background: linear-gradient(to right, #116244, #1a936f);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .btn-filtrar:hover {
+                background: linear-gradient(to right, #0d5034, #116244);
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+
+        /* Botón Limpiar - estilo gris */
+        .btn-limpiar {
+            background: #6c757d;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+            .btn-limpiar:hover {
+                background: #5a6268;
+                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            }
+
+        /* Ajustes para el formulario */
+        .filtro-form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .filtro-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filtro-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-control {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 8px 12px;
+            width: 100%;
+        }
+
+        /* Botón Detalle */
+        .btn-primary {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-primary:hover {
+                background-color: #007BFF; /* Azul moderno */
+                color: white;
+                border-color: #007BFF;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+
+        /* Botón Borrar Ticket */
+        .btn-danger {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-danger:hover {
+                background-color: #E74C3C; /* Rojo moderno */
+                color: white;
+                border-color: #E74C3C;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+        /* Botón Finalizar Ticket */
+        .btn-success {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-success:hover {
+                background-color: #2ECC71; /* Verde moderno */
+                color: white;
+                border-color: #2ECC71;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+
+        .btn-escalar {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-escalar:hover {
+                background-color: #4CAF50; /* Verde moderno */
+                color: white;
+                border-color: #4CAF50;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+        /* Botón Status Ticket */
+        .btn-info {
+            border: 2px solid black;
+            background-color: white;
+            color: black;
+            padding: 8px 16px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .btn-info:hover {
+                background-color: #3498DB; /* Azul moderno */
+                color: white;
+                border-color: #3498DB;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+        .ticket-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+            .ticket-container .row {
+                justify-content: center; /* Centra las columnas */
+            }
+
+        .ticket {
+            width: 45%; /* Ajusta según necesidad */
+            min-width: 300px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .ticket-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+            .ticket-buttons button {
+                flex: 1; /* Hace que los botones ocupen el mismo espacio */
+                min-width: 120px; /* Evita que sean muy pequeños */
+            }
+
+
+
+        .ticket-card {
+            margin-bottom: 20px; /* Ajusta el espacio entre tickets */
+        }
+
+
+        /* Barra superior nueva */
+        .top-bar {
+            height: 60px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 250px; /* Mismo ancho que el sidebar */
+            z-index: 999; /* Un nivel menos que el sidebar */
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+
+            .user-info .user-name {
+                margin-right: 10px;
+                font-weight: 500;
+            }
+
+        .no-tickets-card {
+            width: 100%;
+            max-width: 800px; /* Mismo ancho que tus cards de ticket */
+            margin: 0 auto; /* Centrado horizontal */
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Asegura que el contenedor ocupe todo el ancho disponible */
+        .no-tickets-wrapper {
+            width: 100%;
+            padding: 0 15px; /* Mismo padding que tus otras cards */
+        }
+
+
+        .logout-btn {
+            padding: 6px 15px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul class="menu">
+            <li><a href="@Url.Action("FormularioTicket","FormularioTicket")">Crear Ticket</a></li>
+            <li><a href="@Url.Action("TicketsAtendidosSC","ReporteTicketsAtendidos")">Reporte de Tickets</a></li>
+        </ul>
+    </div>
+    <div class="main-container">
+        <!-- Nueva barra superior -->
+        <div class="top-bar">
+            <div class="user-info">
+                <span class="user-name">@ViewBag.usuario</span>
+                <i class="bi bi-person-circle me-2"></i>
+            </div>
+            <button class="logout-btn" onclick="location.href='@Url.Action("CerrarSesion","Home")'">
+                <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+            </button>
+        </div>
+
+        <!-- Formulario de filtrado por fechas -->
+        <div class="filtro-container">
+            <form asp-action="FiltrarSC" method="post" class="filtro-form">
+                <div class="filtro-group">
+                    <label for="FechaInicio" class="form-label">Fecha Inicio</label>
+                    <input type="date" class="form-control" id="FechaInicio" name="FechaInicio"
+                           value="@(ViewBag.Filtro?.FechaInicio?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
+                           max="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+
+                <div class="filtro-group">
+                    <label for="FechaFin" class="form-label">Fecha Fin</label>
+                    <input type="date" class="form-control" id="FechaFin" name="FechaFin"
+                           value="@(ViewBag.Filtro?.FechaFin?.ToString("yyyy-MM-dd") ?? DateTime.Today.ToString("yyyy-MM-dd"))"
+                           max="@DateTime.Now.ToString("yyyy-MM-dd")">
+                </div>
+
+                <div class="filtro-buttons">
+                    <button type="submit" class="btn-filtrar">
+                        <i class="bi bi-funnel-fill"></i> Filtrar
+                    </button>
+                    @if (ViewBag.AplicarFiltro == true)
+                    {
+                        <a href="@Url.Action("TicketsAtendidosSC")" class="btn-limpiar">
+                            <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+                        </a>
+                    }
+                </div>
+            </form>
+        </div>
+
+
+        <div class="content-section">
+            <h2 class="mb-4 text-center">Tickets Atendidos</h2>
+            <div class="ticket-container">
+
+                <div class="row">
+                    @if (Model != null && Model.Reportes.Any())
+                    {
+                        <span class="num-Tickets">En total hay @ViewBag.CantidadTickets tickets atendidos</span>
+                        foreach (var ticket in Model.Reportes)
+                        {
+                            <div class="col-md-6">
+                                <div class="card ticket-card">
+                                    <div class="card-body">
+                                        <p><strong>Numero de orden: </strong> @ticket.Numero_Orden</p>
+                                        <p><strong>Numero de Serie:</strong> @ticket.Numero_Serie</p>
+                                        <p><strong>Nombre de Modelo:</strong> @ticket.Nombre_Modelo</p>
+                                        <p><strong>Nombre de Cliente: </strong> @ticket.NombreCliente</p>
+                                        <p><strong>Apellido de Cliente:</strong> @ticket.ApellidoCliente</p>
+                                        <p><strong>Empresa: </strong> @ticket.Empresa</p>
+                                        <p><strong>Fecha de inicio: </strong> @ticket.Fecha_Inicio</p>
+                                        <p><strong>Fecha de Fin: </strong> @ticket.Fecha_Fin</p>
+                                        <button class="btn btn-primary" data-numero-orden="@ticket.Numero_Orden" onclick="verDetalleTicket(this)">Detalle</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <!-- Mostrar rango de fechas filtrado -->
+                        @if (ViewBag.AplicarFiltro == true)
+                        {
+                            <div class="text-muted mt-3">
+                                Mostrando resultados del @(ViewBag.Filtro?.FechaInicio?.ToShortDateString() ?? "Sin fecha")
+                                al @(ViewBag.Filtro?.FechaFin?.ToShortDateString() ?? "Sin fecha")
+
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 no-tickets-wrapper">
+                            <div class="no-tickets-card">
+                                Ingresa fechas para ver los tickets.
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Detalle Ticket -->
+        <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="detalleModalLabel">Detalles del Ticket</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalDetalleBody"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            async function verDetalleTicket(button) {
+                const numeroOrden = button.getAttribute('data-numero-orden');
+
+                try {
+                    // Mostrar spinner o indicador de carga
+                    document.getElementById('modalDetalleBody').innerHTML = '<div class="text-center"><div class="spinner-border" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
+
+                    // Usar URL absoluta para evitar problemas de ruta
+                    const baseUrl = window.location.origin;
+                    const response = await fetch(`${baseUrl}/ReporteTicketsAtendidos/ObtenerDetalleTicket?numeroOrden=${encodeURIComponent(numeroOrden)}`);
+
+                    if (!response.ok) {
+                        throw new Error('Error al obtener los detalles');
+                    }
+
+                    const detalleHtml = await response.text();
+                    document.getElementById('modalDetalleBody').innerHTML = detalleHtml;
+
+                    // Mostrar el modal
+                    var modal = new bootstrap.Modal(document.getElementById('detalleModal'));
+                    modal.show();
+                } catch (error) {
+                    console.error('Error:', error);
+                    document.getElementById('modalDetalleBody').innerHTML = `
+                            <div class="alert alert-danger">
+                                Error al cargar los detalles del ticket. Por favor intente nuevamente.
+                                <div class="mt-2">${error.message}</div>
+                            </div>`;
+                    var modal = new bootstrap.Modal(document.getElementById('detalleModal'));
+                    modal.show();
+                }
+            }
+        </script>
+        <!-- Modal Escalar Ticket
+        <div class="modal fade" id="escalarModal" tabindex="-1" aria-labelledby="escalarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="escalarModalLabel">Escalar Ticket a Técnico</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="escalarForm" method="post" asp-action="EscalarTicket">
+                            <input type="hidden" id="numeroOrden" name="numero_orden">
+
+                            <p><strong>Ticket:</strong> <span id="ticketInfo"></span></p>
+
+                            <label for="descripcion" class="form-label">Descripción:</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control" required></textarea>
+
+                            <label for="selectTecnico" class="form-label">Seleccionar Técnico:</label>
+                            <select id="selectTecnico" name="usuario_asignado" class="form-select">
+
+                            </select>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" id="btnEscalar">Escalar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelectorAll(".btn-escalar").forEach(button => {
+                    button.addEventListener("click", function () {
+                        let numeroOrden = this.getAttribute("data-numero-orden");
+                        let numeroSerie = this.getAttribute("data-numero-serie");
+                        let modelo = this.getAttribute("data-modelo");
+
+                        // Llenar el campo oculto del formulario con el número de orden
+                        document.getElementById("numeroOrden").value = numeroOrden;
+
+                        // Mostrar la información en el modal
+                        document.getElementById("ticketInfo").innerText = `Orden: ${numeroOrden} - Modelo: ${modelo}`;
+
+                        // Abrir el modal
+                        var modal = new bootstrap.Modal(document.getElementById("escalarModal"));
+                        modal.show();
+                    });
+                });
+
+                // Enviar el formulario manualmente al hacer clic en "Escalar"
+                document.getElementById("btnEscalar").addEventListener("click", function () {
+                    document.getElementById("escalarForm").submit();
+                });
+            });
+
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var escalarModal = document.getElementById("escalarModal");
+
+                escalarModal.addEventListener("show.bs.modal", function (event) {
+                    var button = event.relatedTarget; // Botón que activó el modal
+                    var numeroOrden = button.getAttribute("data-numero");
+                    var cliente = button.getAttribute("data-cliente");
+                    var descripcion = button.getAttribute("data-descripcion");
+
+                    document.getElementById("numeroOrden").value = numeroOrden;
+                    document.getElementById("ticketInfo").innerText = `${numeroOrden} - ${cliente}`;
+                    document.getElementById("descripcion").value = descripcion;
+                });
+
+                // Enviar formulario al hacer clic en "Escalar"
+                document.getElementById("btnEscalar").addEventListener("click", function () {
+                    document.getElementById("escalarForm").submit();
+                });
+            });
+        </script>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
