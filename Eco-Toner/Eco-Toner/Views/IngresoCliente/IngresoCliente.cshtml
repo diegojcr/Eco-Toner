@@ -1,14 +1,13 @@
-﻿@{
-    Layout = null;
-}
-@model Eco_Toner.Models.FormularioTicketViewModel
+﻿@{Layout = null;}
+
+@model Eco_Toner.Models.IngresoCliente
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario con Menú</title>
+    <title>Registro de Cliente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
@@ -19,7 +18,7 @@
             display: flex;
             flex-direction: column;
         }
-        /* Barra superior nueva */
+        /* Barra superior */
         .top-bar {
             height: 60px;
             background: #f8f9fa;
@@ -31,18 +30,21 @@
             position: fixed;
             top: 0;
             right: 0;
-            left: 250px; /* Mismo ancho que el sidebar */
+            left: 250px;
             z-index: 100;
         }
+
         .user-info {
             display: flex;
             align-items: center;
             margin-right: 20px;
         }
+
             .user-info .user-name {
                 margin-right: 10px;
                 font-weight: 500;
             }
+
         .logout-btn {
             padding: 6px 15px;
             background: #dc3545;
@@ -52,7 +54,7 @@
             font-size: 14px;
             cursor: pointer;
         }
-        /* Sidebar original con ajustes */
+        /* Sidebar */
         .sidebar {
             width: 250px;
             height: 100vh;
@@ -64,6 +66,7 @@
             border-radius: 0 20px 20px 0;
             z-index: 200;
         }
+
             .sidebar h2 {
                 text-align: center;
                 margin-bottom: 15px;
@@ -74,10 +77,12 @@
                 font-family: 'Poppins', sans-serif;
                 text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
             }
+
         .menu {
             list-style: none;
             padding: 0;
         }
+
             .menu li {
                 padding: 15px 20px;
                 cursor: pointer;
@@ -86,11 +91,13 @@
                 border-radius: 10px;
                 margin: 5px;
             }
+
                 .menu li:hover {
                     background: rgba(255, 255, 255, 0.1);
                     transform: translateX(8px);
                     border-left: 4px solid #a1e3b0;
                 }
+
                 .menu li a {
                     color: white;
                     text-decoration: none;
@@ -98,18 +105,19 @@
                     font-weight: 500;
                     transition: color 0.3s ease;
                 }
+
                 .menu li:hover a {
                     color: #dff;
                 }
-        /* Contenedor modificado para ocupar todo el ancho disponible */
+        /* Contenido */
         .content {
             margin-left: 250px;
-            margin-top: 60px; /* Añadido para dar espacio a la barra superior */
+            margin-top: 60px;
             padding: 20px;
             width: calc(100% - 250px);
             min-height: calc(100vh - 60px);
         }
-        /* Formulario modificado para ocupar más espacio horizontal */
+        /* Formulario */
         .form-container {
             background: white;
             padding: 30px;
@@ -117,20 +125,21 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
         }
-        /* Secciones del formulario */
+
         .form-section {
             margin-bottom: 20px;
         }
+
             .form-section h4 {
                 margin-bottom: 15px;
                 font-size: 18px;
                 color: #333;
             }
-        /* Espaciado entre campos */
+
         .form-control, .form-select {
             margin-bottom: 15px;
         }
-        /* Botón adaptado al estilo */
+
         .btn-guardar {
             padding: 8px 20px;
             background-color: #28a745;
@@ -146,13 +155,13 @@
     <div class="sidebar">
         <h2>Menú</h2>
         <ul class="menu">
-            <li><a href="@Url.Action("FormularioTicket","FormularioTicket")">Crear Ticket</a></li>
             <li><a href="@Url.Action("IngresoCliente","IngresoCliente")">Registrar Cliente</a></li>
-            <li><a href="@Url.Action("TicketsAtendidosSC","ReporteTicketsAtendidos")">Reporte de Tickets</a></li>
+            <li><a href="@Url.Action("FormularioTicket","FormularioTicket")">Crear Ticket</a></li>
+
         </ul>
     </div>
 
-    <!-- Nueva barra superior -->
+    <!-- Barra superior -->
     <div class="top-bar">
         <div class="user-info">
             <span class="user-name">@ViewBag.usuario</span>
@@ -163,77 +172,98 @@
         </button>
     </div>
 
-    <form asp-action="FormularioTicket" method="post">
-    <div class="content">
+    <!-- Sidebar y Top-Bar (mantienen el mismo estilo que en tu código original) -->
+
+    <div class="container">
         <div class="form-container">
             <div class="form-section">
-                <h4>Datos Personales</h4>
-                <div class="row">
-                        <div class="col-12">
-                            <label for="CrearTicket_Correo_Cliente">Cliente:</label>
-                            <select class="form-select" asp-for="CrearTicket.Correo_Cliente" required>
-                                <option value="">Seleccione un cliente...</option>
-                                @foreach (var cliente in Model.Clientes)
+                <h4 class="text-center">Datos Personales</h4>
+
+                <!-- Formulario para ingresar datos personales y selección de empresa y oficina -->
+                <form asp-action="IngresoCliente" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Selección de Empresa -->
+                    <div class="form-section mt-3">
+                        <label for="empresaSelect">Seleccione una empresa:</label>
+                        <select asp-for="EmpresaSeleccionada" class="form-control">
+                            <option value="">-- Seleccione Empresa --</option>
+                            @foreach (var empresa in Model.Empresas)
+                            {
+                                <option value="@empresa" selected="@(empresa == Model.EmpresaSeleccionada)">
+                                    @empresa
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Botón para buscar oficinas -->
+                    <div class="form-section mt-3 text-center">
+                        <button type="submit" class="btn btn-primary" name="accion" value="BuscarOficinas">Buscar Oficinas</button>
+                    </div>
+
+                    <!-- Mostrar oficinas si están disponibles -->
+                    @if (Model.Oficinas != null && Model.Oficinas.Any())
+                    {
+                        <div class="form-section mt-3">
+                            <label for="oficinaSelect">Seleccione una oficina:</label>
+                            <select id="oficinaSelect" name="OficinaSeleccionada" class="form-control">
+                                @foreach (var oficina in Model.Oficinas)
                                 {
-                                    <option value="@cliente.CORREOCLIENTE">@cliente.NombreCompleto</option>
+                                    <option value="@oficina">@oficina</option>
                                 }
                             </select>
-                            <span asp-validation-for="CrearTicket.Correo_Cliente" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h4>Datos de registro</h4>
-                <div class="row">
-                    <div class="col-12">
-                            <label for="CrearTicket_Serie_Impresora">Número de Serie de la Impresora:</label>
-                            <input type="text" class="form-control" asp-for="CrearTicket.Serie_Impresora" placeholder="Ingrese el Numero de Serie de la Impresora" required>
-                            <span asp-validation-for="CrearTicket.Serie_Impresora" class="text-danger"></span>
                         </div>
-                    <div class="col-12">
-                                <label for="CrearTicket_Correo_Tecnico">Técnico:</label>
-                                <select class="form-select" asp-for="CrearTicket.Correo_Tecnico" required>
-                                    <option value="">Seleccione un técnico...</option>
-                                    @foreach (var tecnico in Model.Tecnicos)
-                                    {
-                                        <option value="@tecnico.Correo">@tecnico.NombreCompleto - @tecnico.Rol</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="CrearTicket.Correo_Tecnico" class="text-danger"></span>
+                    }
+
+                    <!-- Datos Personales -->
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="nombreCliente">Nombre:</label>
+                                <input type="text" id="nombreCliente" name="Nombre" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="apellidoCliente">Apellido:</label>
+                                <input type="text" id="apellidoCliente" name="Apellido" class="form-control" />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="correoCliente">Correo:</label>
+                                <input type="email" id="correoCliente" name="Correo" class="form-control" />
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-12">
-                                <label for="CrearTicket_Descripcion">Descripción de la falla:</label>
-                                <textarea class="form-control" asp-for="CrearTicket.Descripcion" placeholder="Descripción de la falla" required></textarea>
-                                <span asp-validation-for="CrearTicket.Descripcion" class="text-danger"></span>
+
+                    <!-- Botón para registrar cliente -->
+                    <div class="form-section mt-3 text-center">
+                        <button type="submit" class="btn btn-primary" name="accion" value="RegistrarCliente">Registrar Cliente</button>
                     </div>
-                </div>
+                </form>
             </div>
-
-            <div class="text-start mt-4">
-                <button type="submit" class="btn btn-guardar">CREAR Y ASIGNAR</button>
-            </div>
-                @if (TempData["MensajeExitoCrearTicket"] != null)
-                {
-                    <div class="alert alert-success">
-                        @TempData["MensajeExitoCrearTicket"]
-                    </div>
-                }
-
-                @if (TempData["MensajeErrorCrearTicket"] != null)
-                {
-                    <div class="alert alert-danger">
-                        @TempData["MensajeErrorCrearTicket"]
-                    </div>
-                }
-
         </div>
     </div>
-    </form>
 
-    <!-- Agrega jQuery Validation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+        <!-- Mensajes de éxito o error -->
+        @if (TempData["MensajeExitoRegistro"] != null)
+        {
+            <div class="alert alert-success mt-3 text-center">
+                @TempData["MensajeExitoRegistro"]
+            </div>
+        }
+
+        @if (TempData["MensajeErrorRegistro"] != null)
+        {
+            <div class="alert alert-danger mt-3 text-center">
+                @TempData["MensajeErrorRegistro"]
+            </div>
+        }
+    </div>
+
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
