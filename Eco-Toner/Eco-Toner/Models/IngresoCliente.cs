@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Eco_Toner.Models
+﻿namespace Eco_Toner.Models
 {
 public class IngresoCliente
     {
