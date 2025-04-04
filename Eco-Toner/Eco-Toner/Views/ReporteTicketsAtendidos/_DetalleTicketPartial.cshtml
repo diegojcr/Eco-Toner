@@ -1,0 +1,15 @@
+﻿@{
+    Layout = null;
+}
+
+@model DetalleTicket
+
+<div>
+    <p><strong>Número de Orden:</strong> @Model.Numero_Orden</p>
+    <p><strong>Descripción:</strong> @Model.Descripción</p>
+    <p><strong>Técnico Previo:</strong> @Model.NOMBREPREVIO @Model.APELLIDOPREVIO</p>
+    <p><strong>Técnico Asignado:</strong> @Model.NOMBREASIGNADO @Model.APELLIDOASIGNADO</p>
+    <p><strong>Fecha de Asignación:</strong> @Model.Fecha_Asignación?.ToString("g")</p>
+    <p><strong>Fecha de Inicio:</strong> @Model.Fecha_Inicio?.ToString("g")</p>
+    <p><strong>Fecha de Fin:</strong> @Model.Fecha_Fin?.ToString("g")</p>
+</div>
