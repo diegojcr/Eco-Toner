@@ -63,6 +63,16 @@
         public string CORREOTECNICO { get; set; }        // Agrega esto si tu SP lo devuelve
     }
 
+    public class InfoCorreoFinalizado
+    {
+        public string NOMBRETECNICO { get; set; }
+        public string APELLIDOTECNICO { get; set; }
+        public string ESTADO { get; set; }
+        public DateTime? FECHAFINAL { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string CORREOCLIENTE { get; set; }
+        public string NOMBRECLIENTE { get; set; }
+    }
 
 }
 

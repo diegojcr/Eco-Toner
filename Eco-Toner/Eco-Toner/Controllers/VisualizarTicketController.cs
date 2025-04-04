@@ -192,9 +192,9 @@ namespace Eco_Toner.Controllers
         }
 
         [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> FinalizarTicket([FromBody] string numeroOrden)
         {
-            // Obtener el usuario de la sesión
             var usuario = HttpContext.Session.GetString("Usuario");
             ViewBag.usuario = usuario;
 
@@ -205,21 +205,50 @@ namespace Eco_Toner.Controllers
 
             try
             {
-                Console.WriteLine("Número de orden recibido: " + numeroOrden);
-
-                _context.Database.ExecuteSqlRaw(
+                // 1. Finalizar el ticket
+                await _context.Database.ExecuteSqlRawAsync(
                     "EXEC SP_FINALIZAR_TICKETS @usario, @numero_orden",
                     new SqlParameter("@usario", usuario),
                     new SqlParameter("@numero_orden", numeroOrden));
 
-                return Ok("Ticket finalizado correctamente.");
+                // 2. Obtener información para el correo
+                var infoCorreo = (await _context.Database
+                    .SqlQueryRaw<InfoCorreoFinalizado>(
+                        "EXEC SP_INFO_CORREO_FINALIZADO @USUARIO_ASIGNADO, @NUMERO_ORDEN",
+                        new SqlParameter("@USUARIO_ASIGNADO", usuario),
+                        new SqlParameter("@NUMERO_ORDEN", numeroOrden))
+                    .ToListAsync())
+                    .FirstOrDefault();
+
+                if (infoCorreo != null && !string.IsNullOrEmpty(infoCorreo.CORREOCLIENTE))
+                {
+                    // 3. Enviar correo al cliente
+                    string asunto = $"Ticket Finalizado - {numeroOrden}";
+                    string mensaje = $@"
+                <h2>Estimado(a) {infoCorreo.NOMBRECLIENTE}</h2>
+                <p>Nos complace informarle que su ticket ha sido finalizado.</p>
+                
+                <h3>Detalles del Ticket</h3>
+                <p><strong>Número de Ticket:</strong> {numeroOrden}</p>
+                <p><strong>Técnico Responsable:</strong> {infoCorreo.NOMBRETECNICO} {infoCorreo.APELLIDOTECNICO}</p>
+                <p><strong>Estado Final:</strong> {infoCorreo.ESTADO}</p>
+                <p><strong>Fecha de Finalización:</strong> {infoCorreo.FECHAFINAL?.ToString("dd/MM/yyyy HH:mm")}</p>
+                <p><strong>Descripción del Servicio:</strong></p>
+                <p>{infoCorreo.DESCRIPCION}</p>
+                
+                <p>Si tiene alguna pregunta adicional o necesita más asistencia, no dude en contactarnos.</p>
+                <p>Gracias por confiar en nuestros servicios.</p>
+                <p>Atentamente,<br>El Equipo de Soporte Técnico</p>";
+
+                    await _emailService.EnviarCorreoAsync("diegocosillo@gmail.com", asunto, mensaje);
+                }
+
+                return Ok(new { success = true, message = "Ticket finalizado y notificación enviada al cliente." });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Error al finalizar el ticket: " + ex.Message);
-
+                return StatusCode(500, new { success = false, message = "Error al finalizar el ticket: " + ex.Message });
             }
-
         }
 
     }
